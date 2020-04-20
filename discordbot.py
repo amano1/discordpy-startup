@@ -164,4 +164,4 @@ async def on_message(message):
         deleuser=None
     
     
-client.run(OKEN)
+client.run(TOKEN)
