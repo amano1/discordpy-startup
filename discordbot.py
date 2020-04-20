@@ -50,7 +50,12 @@ async def on_ready():
             user_dic[member.id]=point
         elif not (member.id in id) or not member.bot:
             user_dic[member.id]=0
-            await member.edit(nick = f"{member.name}║Point：0")
+            try:
+                await member.edit(nick = f"{member.name}║Point：0")
+            except:
+                print(f"{member}のニックネームを変更できませんでした")
+            else:
+                print(f"{member}のニックネームに║Point:0を追加")
     print(user_dic)
 
     
