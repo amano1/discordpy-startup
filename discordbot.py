@@ -73,9 +73,9 @@ async def on_ready():
         user_1 = client.get_user(num1_set[0])
         user_2 = client.get_user(num2_set[0])
         user_3 = client.get_user(num3_set[0])
-        await ch_1.edit(name = f"🥇{user_1.name}║{num1_set[1]}")
-        await ch_2.edit(name = f"🥈{user_2.name}║{num2_set[1]}")
-        await ch_3.edit(name = f"🥉{user_3.name}║{num3_set[1]}")
+        await ch_1.edit(name = f"🥇{num1_set[1]}║{user_1.name}")
+        await ch_2.edit(name = f"🥈{num2_set[1]}║{user_2.name}")
+        await ch_3.edit(name = f"🥉{num3_set[1]}║{user_3.name}")
         
         
         #起動ログを指定のチャンネルに送信
@@ -107,9 +107,9 @@ async def loop_60():
     user_1 = client.get_user(num1_set[0])
     user_2 = client.get_user(num2_set[0])
     user_3 = client.get_user(num3_set[0])
-    await ch_1.edit(name = f"🥇{user_1.name}║{num1_set[1]}")
-    await ch_2.edit(name = f"🥈{user_2.name}║{num2_set[1]}")
-    await ch_3.edit(name = f"🥉{user_3.name}║{num3_set[1]}")
+    await ch_1.edit(name = f"🥇{num1_set[1]}║{user_1.name}")
+    await ch_2.edit(name = f"🥈{num2_set[1]}║{user_2.name}")
+    await ch_3.edit(name = f"🥉{num3_set[1]}║{user_3.name}")
 
 @client.event
 async def on_message(message):
