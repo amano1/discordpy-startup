@@ -75,21 +75,14 @@ async def on_message(message):
     global user_dic
     
     if message.content.startswith("i)point "):
-        user_id = int(message.content.split("i)point ")[1])
-        user_mention = message.content.split("i)point ")[1]
-        user = None
         try:
-            u = client.get_user(user_id)
-        except:
-            pass
-        else:
-            user = u
-        try:
+            user_id = int(message.content.split("i)point ")[1])
+        except:        
+            user_mention = message.content.split("i)point ")[1]
             u = discord.utils.get(message.guild.members,mention = user_mention)
-        except:
-            pass
         else:
-            user = u
+            u = client.get_user(user_id)
+        user = u
         if user:
             point = user_dic[user.id]
             embed = discord.Embed(
