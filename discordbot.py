@@ -97,7 +97,19 @@ async def loop_30():
     
 @tasks.loop(seconds=60)
 async def loop_60():
-    pass
+    user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
+    ch_1 = client.get_channel(701803530566238290)
+    ch_2 = client.get_channel(701803756571983893)
+    ch_3 = client.get_channel(701803622811435028)
+    num1_set = list(list(user_list)[0])
+    num2_set = list(list(user_list)[1])
+    num3_set = list(list(user_list)[2])
+    user_1 = client.get_user(num1_set[0])
+    user_2 = client.get_user(num2_set[0])
+    user_3 = client.get_user(num3_set[0])
+    await ch_1.edit(name = f"🥇{user_1.name}║{num1_set[1]}")
+    await ch_2.edit(name = f"🥈{user_2.name}║{num2_set[1]}")
+    await ch_3.edit(name = f"🥉{user_3.name}║{num3_set[1]}")
 
 @client.event
 async def on_message(message):
