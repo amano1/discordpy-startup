@@ -16,7 +16,6 @@ import math
 from discord.ext import tasks
 from datetime import datetime, timedelta, timezone
 
-
 import logging
 
 # タイムゾーンの生成
