@@ -60,6 +60,7 @@ async def on_ready():
 
     
     loop_30.start
+    loop_60.start
     
     #起動ログを指定のチャンネルに送信
     ready_chid = 701739744320553015
@@ -74,8 +75,20 @@ async def on_ready():
     
 @tasks.loop(seconds=30)
 async def loop_30():
-    pass
-    
+    global user_dic
+    user_dic = sorted(user_dic.items(), key=lambda x:x[1])
+
+@tasks.loop(seconds=60)
+async def loop_60():
+    ch_1 = client.get_channel(701803530566238290)
+    ch_2 = client.get_channel(701803756571983893)
+    ch_3 = client.get_channel(701803756571983893)
+    user_1 = client.get_user(user_dic.keys()[0])
+    user_2 = client.get_user(user_dic.keys()[1])
+    user_3 = client.get_user(user_dic.keys()[2])
+    await ch_1.edit(name = f"🥇]{user_1.name}║{user_dic[user_1.id]}")
+    await ch_1.edit(name = f"🥈]{user_2.name}║{user_dic[user_1.id]}")
+    await ch_1.edit(name = f"🥉]{user_3.name}║{user_dic[user_1.id]}")
 
 @client.event
 async def on_message(message):
