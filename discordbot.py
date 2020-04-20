@@ -56,8 +56,6 @@ async def on_ready():
             else:
                 print(f"⭕┃{member}のニックネームに║Point:0を追加")
     else:
-        
-        global user_dic
         user_dic = sorted(user_dic.items(), key=lambda x:x[1])
         print(user_dic)
         ch_1 = client.get_channel(701803530566238290)
