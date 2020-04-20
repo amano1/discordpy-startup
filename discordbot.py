@@ -42,13 +42,13 @@ async def on_ready():
     guild = client.get_guild(674983696977362965)
     members = list(guild.members)
     for member in members:
-        if "║Point：" in member.display_name:
-            point = int((member.display_name).split("║Point：")[1])
-            user_dic[member.id]=point
         id = [446610711230152706,
               690901325298401291,
               446610711230152706]
-        elif not member.id in id and not member.bot:
+        if "║Point：" in member.display_name:
+            point = int((member.display_name).split("║Point：")[1])
+            user_dic[member.id]=point
+        elif not (member.id in id) and not member.bot:
             user_dic[member.id]=0
             await member.edit(nick = f"{member.name}║Point：0")
     print(user_dic)
