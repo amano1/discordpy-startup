@@ -55,22 +55,42 @@ async def on_ready():
                 print(f"❌┃{member}のニックネームを変更できませんでした")
             else:
                 print(f"⭕┃{member}のニックネームに║Point:0を追加")
-    print(user_dic)
-    for key in user_dict.keys():
-        print(key)
-    
-    #起動ログを指定のチャンネルに送信
-    ready_chid = 701739744320553015
-    ready_ch = client.get_channel(ready_chid)
-    dateTime = datetime.now(JST)
-    embed = discord.Embed(
-        title = "起動ログ",
-        description = f"{dateTime}")
-    await ready_ch.send(embed = embed)
-    await client.change_presence(activity=discord.Game(name="動作中(^w^三^w^)おっおっおっ"))
+    else:
+        
+        global user_dic
+        user_dic = sorted(user_dic.items(), key=lambda x:x[1])
+        print(user_dic)
+        ch_1 = client.get_channel(701803530566238290)
+        ch_2 = client.get_channel(701803756571983893)
+        ch_3 = client.get_channel(701803622811435028)
+        print(ch_1.name)
+        print(ch_2.name)
+        print(ch_3.name)
+        for key in user_dic.keys():
+            print(key)
+        print(list(user_dic.keys())[-1])
+        print(list(user_dic.keys())[-2])
+        print(list(user_dic.keys())[-3])
+        user_1 = client.get_user(list(user_dic.keys())[-1])
+        user_2 = client.get_user(list(user_dic.keys())[-2])
+        user_3 = client.get_user(list(user_dic.keys())[-3])
+        await ch_1.edit(name = f"🥇]{user_1.name}║{user_dic[user_1.id]}")
+        await ch_1.edit(name = f"🥈]{user_2.name}║{user_dic[user_1.id]}")
+        await ch_1.edit(name = f"🥉]{user_3.name}║{user_dic[user_1.id]}")
+        
+        
+        #起動ログを指定のチャンネルに送信
+        ready_chid = 701739744320553015
+        ready_ch = client.get_channel(ready_chid)
+        dateTime = datetime.now(JST)
+        embed = discord.Embed(
+            title = "起動ログ",
+            description = f"{dateTime}")
+        await ready_ch.send(embed = embed)
+        await client.change_presence(activity=discord.Game(name="動作中(^w^三^w^)おっおっおっ"))
 
-    loop_30.start()
-    loop_60.start()
+        loop_30.start()
+        loop_60.start()
     
 @tasks.loop(seconds=30)
 async def loop_30():
@@ -87,21 +107,17 @@ async def loop_60():
     print(ch_1.name)
     print(ch_2.name)
     print(ch_3.name)
-    for key in user_dict.keys():
+    for key in user_dic.keys():
         print(key)
-    '''
     print(list(user_dic.keys())[-1])
     print(list(user_dic.keys())[-2])
     print(list(user_dic.keys())[-3])
     user_1 = client.get_user(list(user_dic.keys())[-1])
     user_2 = client.get_user(list(user_dic.keys())[-2])
     user_3 = client.get_user(list(user_dic.keys())[-3])
-    print("C")
     await ch_1.edit(name = f"🥇]{user_1.name}║{user_dic[user_1.id]}")
     await ch_1.edit(name = f"🥈]{user_2.name}║{user_dic[user_1.id]}")
     await ch_1.edit(name = f"🥉]{user_3.name}║{user_dic[user_1.id]}")
-    print("D")
-    '''
 
 @client.event
 async def on_message(message):
