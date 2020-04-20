@@ -57,10 +57,10 @@ async def on_ready():
                 print(f"⭕┃{member}のニックネームに║Point:0を追加")
     else:
         user_list = sorted(user_dic.items(), key=lambda x:x[1])
-        user_dict = None
+        user_dic = None
         for set in user_list:
             for key,value in zip(set[0],set[1]):
-                user_dict[key] = value
+                user_dic[key] = value
         print(user_dic)
         ch_1 = client.get_channel(701803530566238290)
         ch_2 = client.get_channel(701803756571983893)
