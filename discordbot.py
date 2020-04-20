@@ -75,10 +75,12 @@ async def on_ready():
     
 @tasks.loop(seconds=30)
 async def loop_30():
+    print("loop_30")
     pass
     
 @tasks.loop(seconds=60)
 async def loop_60():
+    print("loop_60")
     global user_dic
     user_dic = sorted(user_dic.items(), key=lambda x:x[1])
     print(user_dic)
