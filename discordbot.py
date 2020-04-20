@@ -45,7 +45,10 @@ async def on_ready():
         if "║Point：" in member.display_name:
             point = int((member.display_name).split("║Point：")[1])
             user_dic[member.id]=point
-        elif member.id != 690901325298401291 and not member.bot:
+        id = [446610711230152706,
+              690901325298401291,
+              446610711230152706]
+        elif not member.id in id and not member.bot:
             user_dic[member.id]=0
             await member.edit(nick = f"{member.name}║Point：0")
     print(user_dic)
