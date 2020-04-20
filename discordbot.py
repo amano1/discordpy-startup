@@ -57,7 +57,8 @@ async def on_ready():
                 print(f"⭕┃{member}のニックネームに║Point:0を追加")
     else:
         user_list = sorted(user_dic.items(), key=lambda x:x[1])
-        user_dic = None
+        print(user_list)
+        user_dic = {}
         for set in user_list:
             for key,value in zip(set[0],set[1]):
                 user_dic[key] = value
