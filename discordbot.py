@@ -87,8 +87,7 @@ async def loop_60():
     print(ch_2.name)
     print(ch_3.name)
     print(list(user_dic.keys()))
-    print(list(user_dic.keys()))
-    print(list(user_dic.keys()))
+    '''
     print(list(user_dic.keys())[-1])
     print(list(user_dic.keys())[-2])
     print(list(user_dic.keys())[-3])
@@ -100,6 +99,7 @@ async def loop_60():
     await ch_1.edit(name = f"🥈]{user_2.name}║{user_dic[user_1.id]}")
     await ch_1.edit(name = f"🥉]{user_3.name}║{user_dic[user_1.id]}")
     print("D")
+    '''
 
 @client.event
 async def on_message(message):
