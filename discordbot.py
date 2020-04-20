@@ -77,6 +77,7 @@ async def on_message(message):
     global user_dic
     
     if message.content.startswith("i)point "):
+        u = None
         try:
             user_id = int(message.content.split("i)point ")[1])
         except:        
@@ -113,7 +114,7 @@ async def on_message(message):
         member = message.guild.get_member(user.id)
         await member.edit(nick = f"{user.name}║Point：{user_dic[user.id]}")
         
-    if message.content == "a)reward":
+    if message.content == "i)reward":
         user = message.author
         ch_id = 701721786592657461
         ch = client.get_channel(ch_id)
