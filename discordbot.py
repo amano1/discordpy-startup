@@ -86,7 +86,8 @@ async def on_ready():
             title = "起動ログ",
             description = f"{dateTime}")
         await ready_ch.send(embed = embed)
-        await client.change_presence(activity=discord.Game(name="動作中(^w^三^w^)おっおっおっ"))
+        num = len(guild.members)
+        await client.change_presence(activity=discord.Game(name="{num}members in this server"))
 
         loop_30.start()
         loop_60.start()
