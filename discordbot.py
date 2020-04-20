@@ -80,16 +80,19 @@ async def loop_30():
 async def loop_60():
     global user_dic
     user_dic = sorted(user_dic.items(), key=lambda x:x[1])
-    print(user_dic)
+    print("A")
     ch_1 = client.get_channel(701803530566238290)
     ch_2 = client.get_channel(701803756571983893)
-    ch_3 = client.get_channel(701803756571983893)
-    user_1 = client.get_user(user_dic.keys()[0])
-    user_2 = client.get_user(user_dic.keys()[1])
-    user_3 = client.get_user(user_dic.keys()[2])
+    ch_3 = client.get_channel(701803622811435028)
+    print("B")
+    user_1 = client.get_user(user_dic.keys()[-1])
+    user_2 = client.get_user(user_dic.keys()[-2])
+    user_3 = client.get_user(user_dic.keys()[-3])
+    print("C")
     await ch_1.edit(name = f"🥇]{user_1.name}║{user_dic[user_1.id]}")
     await ch_1.edit(name = f"🥈]{user_2.name}║{user_dic[user_1.id]}")
     await ch_1.edit(name = f"🥉]{user_3.name}║{user_dic[user_1.id]}")
+    print("D")
 
 @client.event
 async def on_message(message):
