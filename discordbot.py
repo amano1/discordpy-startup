@@ -79,11 +79,13 @@ async def loop_30():
 async def loop_60():
     global user_dic
     user_dic = sorted(user_dic.items(), key=lambda x:x[1])
-    print("A")
+    print(user_dic)
     ch_1 = client.get_channel(701803530566238290)
     ch_2 = client.get_channel(701803756571983893)
     ch_3 = client.get_channel(701803622811435028)
-    print("B")
+    print(ch_1.name)
+    print(ch_2.name)
+    print(ch_3.name)
     print(list(user_dic.keys()))
     print(list(user_dic.keys()))
     print(list(user_dic.keys()))
