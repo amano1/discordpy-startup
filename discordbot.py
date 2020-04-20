@@ -69,9 +69,9 @@ async def on_ready():
         print(ch_3.name)
         for key in user_dic.keys():
             print(key)
-        print(list(user_list)[0])
-        print(list(user_dic.keys())[1])
-        print(list(user_dic.keys())[2])
+        print(list(list(user_list)[0]))
+        print(list(list(user_list)[1]))
+        print(list(list(user_list)[2]))
         user_1 = client.get_user(list(user_dic.keys())[-1])
         user_2 = client.get_user(list(user_dic.keys())[-2])
         user_3 = client.get_user(list(user_dic.keys())[-3])
