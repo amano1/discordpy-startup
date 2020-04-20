@@ -87,7 +87,7 @@ async def on_ready():
             description = f"{dateTime}")
         await ready_ch.send(embed = embed)
         num = len(guild.members)
-        await client.change_presence(activity=discord.Game(name="{num}members in this server"))
+        await client.change_presence(activity=discord.Game(name=f"{num}members in this server"))
 
         loop_30.start()
         loop_60.start()
