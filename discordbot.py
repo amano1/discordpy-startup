@@ -75,11 +75,12 @@ async def on_ready():
     
 @tasks.loop(seconds=30)
 async def loop_30():
-    global user_dic
-    user_dic = sorted(user_dic.items(), key=lambda x:x[1])
-
+    pass
+    
 @tasks.loop(seconds=60)
 async def loop_60():
+    global user_dic
+    user_dic = sorted(user_dic.items(), key=lambda x:x[1])
     ch_1 = client.get_channel(701803530566238290)
     ch_2 = client.get_channel(701803756571983893)
     ch_3 = client.get_channel(701803756571983893)
