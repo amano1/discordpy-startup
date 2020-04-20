@@ -56,9 +56,8 @@ async def on_ready():
             else:
                 print(f"⭕┃{member}のニックネームに║Point:0を追加")
     print(user_dic)
-
-    loop_30.start()
-    loop_60.start()
+    for key in user_dict.keys():
+        print(key)
     
     #起動ログを指定のチャンネルに送信
     ready_chid = 701739744320553015
@@ -70,6 +69,8 @@ async def on_ready():
     await ready_ch.send(embed = embed)
     await client.change_presence(activity=discord.Game(name="動作中(^w^三^w^)おっおっおっ"))
 
+    loop_30.start()
+    loop_60.start()
     
 @tasks.loop(seconds=30)
 async def loop_30():
