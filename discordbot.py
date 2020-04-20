@@ -68,6 +68,7 @@ async def on_ready():
     
 @tasks.loop(seconds=30)
 async def loop_30():
+    pass
     
 
 @client.event
