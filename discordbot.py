@@ -86,7 +86,8 @@ async def loop_60():
     print(ch_1.name)
     print(ch_2.name)
     print(ch_3.name)
-    print(list(user_dic.keys()))
+    List = list(user_dic.keys())
+    print(List)
     '''
     print(list(user_dic.keys())[-1])
     print(list(user_dic.keys())[-2])
