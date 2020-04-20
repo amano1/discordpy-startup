@@ -72,7 +72,7 @@ async def on_ready():
         print(num3_set)
         user_1 = client.get_user(num1_set[0])
         user_2 = client.get_user(num2_set[0])
-        user_3 = client.get_user(num3_set[1])
+        user_3 = client.get_user(num3_set[0])
         await ch_1.edit(name = f"🥇{user_1.name}║{user_dic[user_1.id]}")
         await ch_1.edit(name = f"🥈{user_2.name}║{user_dic[user_1.id]}")
         await ch_1.edit(name = f"🥉{user_3.name}║{user_dic[user_1.id]}")
