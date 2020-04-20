@@ -21,7 +21,6 @@ import logging
 # タイムゾーンの生成
 JST = timezone(timedelta(hours=+9), 'JST')
 
-
 client = discord.Client()
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
 server_number = len(client.guilds)
