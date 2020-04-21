@@ -148,6 +148,7 @@ async def on_message(message):
         em_desc = message.embeds[0].description
         pattern = r"(.{1,})は(\d{1,})経験値を獲得したはず。"
         result = re.sub(pattern,"match",em_desc)
+        print(result)
         if not (result.group(1) and result.group(2)):
             print("didnt match A")
             return
@@ -193,6 +194,7 @@ async def on_message(message):
         else:        
             pattern = r":yen: (\d{1,}) has been deducted"
             result = re.sub(pattern,"match",resp)
+            print(result)
             if result != "match":
                 embed = discord.Embed(
                     title = f"あちゃーごめん{user.name}。\nなんか報酬配布がうまくいかなかったわ",
