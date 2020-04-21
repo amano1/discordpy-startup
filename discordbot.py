@@ -221,16 +221,16 @@ async def on_message(message):
             await message.channel.send(embed = embed)
             r_flag = True
         else:        
-            pattern = r":yen: (\d{1,}) has been deducted"
+            pattern = r"(\d{1,}) has been deducted"
             result = re.search(pattern,resp)
-            if result:
+            if not result:
                 embed = discord.Embed(
                     title = f"あちゃーごめん{user.name}。\nなんか報酬配布がうまくいかなかったわ",
                     color = discord.Color.red())
                 await message.channel.send(embed = embed)
                 r_flag = True
                 return
-            if point != result.group(2):
+            if point != int(result.group(2)):
                 member = message.guild.member(user.id)
                 await member.edit(nick = f"［0］{member.name}")
                 embed = discord.Embed(
