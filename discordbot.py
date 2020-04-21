@@ -118,6 +118,12 @@ async def loop():
     await ch_1.edit(name = f"🥇{num1_set[1]}|{user_1.name}")
     await ch_2.edit(name = f"🥈{num2_set[1]}|{user_2.name}")
     await ch_3.edit(name = f"🥉{num3_set[1]}|{user_3.name}")
+    if num1_set[0] == 0:
+        await ch_1.edit(name = f"🥇None")
+    if num2_set[0] == 0:
+        await ch_2.edit(name = f"🥈None")
+    if num3_set[0] == 0:
+        await ch_3.edit(name = f"🥉None")
     print(ch_1.name)
     print(ch_2.name)
     print(ch_3.name)
