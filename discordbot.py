@@ -105,9 +105,6 @@ async def loop():
     guild=client.get_guild(674983696977362965)
     num = len(guild.members)
     await client.change_presence(activity=discord.Game(name=f"{num}members"))
-    await asyncio.sleep(2)
-    await client.change_presence(activity=discord.Game(name=f"in this server"))
-    '''
     user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
     ch_1 = client.get_channel(701803530566238290)
     ch_2 = client.get_channel(701803756571983893)
@@ -124,7 +121,6 @@ async def loop():
     print(ch_1.name)
     print(ch_2.name)
     print(ch_3.name)
-    '''
     
 @client.event
 async def on_message(message):
