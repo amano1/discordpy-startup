@@ -153,13 +153,11 @@ async def on_message(message):
         pattern = r"(.{1,})は(\d{1,})経験値を獲得"
         result = re.search(pattern,em_desc)
         if not result:
-            print("didnt match A")
             return
         mention = result.group(1)
         exp = result.group(2)
         user = discord.utils.get(client.users,mention = mention)
-        if not user:
-            print("didnt match B")
+        if not user or user == amano:
             return
         pattern = r'^(\［(\d{1,})］)'
         member = message.guild.get_member(user.id)
@@ -211,9 +209,8 @@ async def on_message(message):
             await message.channel.send(embed = embed)
         else:        
             pattern = r":yen: (\d{1,}) has been deducted"
-            result = re.sub(pattern,"match",resp)
-            print(result)
-            if result != "match":
+            result = re.search(pattern,resp)
+            if result:
                 embed = discord.Embed(
                     title = f"あちゃーごめん{user.name}。\nなんか報酬配布がうまくいかなかったわ",
                     color = discord.Color.red())
