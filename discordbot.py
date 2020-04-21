@@ -146,7 +146,7 @@ async def on_message(message):
             return
         em_title = message.embeds[0].title
         em_desc = message.embeds[0].description
-        pattern = r"(.{1,})は(\d{1,})経験値を獲得したはず。"
+        pattern = r"(.{1,})は(\d{1,})経験値を獲得"
         result = re.search(pattern,em_desc)
         print(result)
         if not result:
