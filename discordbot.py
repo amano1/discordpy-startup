@@ -44,13 +44,15 @@ async def on_ready():
         id = [446610711230152706,
               690901325298401291,
               446610711230152706]
-        if "║Point：" in member.display_name:
-            point = int((member.display_name).split("[")[1].split("]")[0])
+        pattern = r'^(\［\d{1,}］)'
+        result = re.sub(pattern,"match",member.display_name)
+        if result == "match":
+            point = int(result.grupe(2))
             user_dic[member.id]=point
         elif not (member.id in id) or not member.bot:
             user_dic[member.id]=0
             try:
-                await member.edit(nick = f"[0]{member.name}")
+                await member.edit(nick = f"［0］{member.name}")
             except:
                 print(f"❌┃{member}のニックネームを変更できませんでした")
             else:
@@ -73,9 +75,9 @@ async def on_ready():
         user_1 = client.get_user(num1_set[0])
         user_2 = client.get_user(num2_set[0])
         user_3 = client.get_user(num3_set[0])
-        await ch_1.edit(name = f"🥇{num1_set[1]}║{user_1.name}")
-        await ch_2.edit(name = f"🥈{num2_set[1]}║{user_2.name}")
-        await ch_3.edit(name = f"🥉{num3_set[1]}║{user_3.name}")
+        await ch_1.edit(name = f"🥇{num1_set[1]}|{user_1.name}")
+        await ch_2.edit(name = f"🥈{num2_set[1]}|{user_2.name}")
+        await ch_3.edit(name = f"🥉{num3_set[1]}|{user_3.name}")
         
         
         #起動ログを指定のチャンネルに送信
@@ -116,6 +118,7 @@ async def loop_60():
 
 @client.event
 async def on_message(message):
+    amano = client.get_user(690901325298401291)
     global user_dic
     
     if message.content.startswith("i)point "):
@@ -141,45 +144,60 @@ async def on_message(message):
             return
         em_title = message.embeds[0].title
         em_desc = message.embeds[0].description
-        if not "戦闘結果" in em_title:
+        pattern = r"(.{1,})は(\d{1,})経験値を獲得したはず。"
+        result = re.sub(pattern,"match",em_desc)
+        if result != "match":
             return
-        mention = (em_desc.split("\n")[2]).split("は")[0]
+        mention = result.group(1)
+        exp = result.group(2)
         user = discord.utils.get(client.users,mention = mention)
-        if not user or user.id == 690901325298401291:
+        if not user:
             return
         if user.id in user_dic:
             user_dic[user.id] = int(user_dic[user.id]) + 1
         else:
             user_dic[user.id] = 1
-        print(f"{user.name}:{user_dic[user.id]}")
         member = message.guild.get_member(user.id)
-        await member.edit(nick = f"[{user_dic[user.id]}]{user.name}")
+        await member.edit(nick = f"［{user_dic[user.id]}］{member.name}")
         
     if message.content == "i)reward":
-        user = message.author
         ch_id = 701721786592657461
         ch = client.get_channel(ch_id)
-        await ch.send(f"t!credit {user.id} {user_dic[user.id]}")
+        user = message.author
+        await ch.send(f"reward [{user.id}] [{user_dic[user.id]}]")
         def check(msg):
             if msg.author.id != 172002275412279296:
                 return 0
-            if not msg.content.startswith("Transferring"):
+            if msg.channel.id != ch_id:
                 return 0
-            if msg.channel != ch:
+            if not "deducted" in msg.content:
+                return 0
+            if not amano.name in msg.content:
                 return 0
             return 1
         try:
-            t_msg=await client.wait_for('message',timeout=5,check = check)
-        except asyncio.TimeoutError:
-            await ch.send('…ん？竜巻返事ない。謎ｗ')
-        else:
-            code = t_msg.content.split("To confirm, type `")[1].split("` or type")[0]
-            await ch.send(code)
-            user_dic[user.id] = 0
-            member = message.guild.get_member(user.id)
-            await member.edit(nick = f"{user.name}║Point：{user_dic[user.id]}")            
-
-    
+            resp = await client.wait_for("message",timeout = 5,check = check)
+        axcept:
+            embed = discord.Embed(
+                title = f"あちゃーごめん{user.name}。\nなんか報酬配布がうまくいかなかったわ",
+                color = discord.Color.red())
+            await message.channel.send(embed = embed)
+        else:        
+            pattern = r":yen: (\d{1,}) has been deducted"
+            result = re.sub(pattern,"match",resp)
+            if result != "match":
+                embed = discord.Embed(
+                    title = f"あちゃーごめん{user.name}。\nなんか報酬配布がうまくいかなかったわ",
+                    color = discord.Color.red())
+                await message.channel.send(embed = embed)
+                return
+            if point != result.group(2):
+                member = message.guild.member(user.id)
+                await member.edit(nick = f"［0］{member.name}")
+                embed = discord.Embed(
+                    title = f"{user.name}に**{point}TCredit**を配布したよ！。\nおめでとう！(Pointがリセットされました)",
+                    color = discord.Color.green())
+                await message.channel.send(embed = embed)
     
     global deleuser
     global delech
