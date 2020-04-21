@@ -45,16 +45,16 @@ async def on_ready():
               690901325298401291,
               446610711230152706]
         if "║Point：" in member.display_name:
-            point = int((member.display_name).split("║Point：")[1])
+            point = int((member.display_name).split("[")[1].split("]")[0])
             user_dic[member.id]=point
         elif not (member.id in id) or not member.bot:
             user_dic[member.id]=0
             try:
-                await member.edit(nick = f"{member.name}║Point：0")
+                await member.edit(nick = f"[0]{member.name}")
             except:
                 print(f"❌┃{member}のニックネームを変更できませんでした")
             else:
-                print(f"⭕┃{member}のニックネームに║Point:0を追加")
+                print(f"⭕┃{member}のニックネームにPoint:0を追加")
     else:
         user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
         print(user_list)
@@ -98,6 +98,8 @@ async def loop_30():
     
 @tasks.loop(seconds=60)
 async def loop_60():
+    num = len(guild.members)
+    await client.change_presence(activity=discord.Game(name=f"{num}members in this server"))
     user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
     ch_1 = client.get_channel(701803530566238290)
     ch_2 = client.get_channel(701803756571983893)
@@ -141,7 +143,6 @@ async def on_message(message):
         em_desc = message.embeds[0].description
         if not "戦闘結果" in em_title:
             return
-        print("戦闘結果")
         mention = (em_desc.split("\n")[2]).split("は")[0]
         user = discord.utils.get(client.users,mention = mention)
         if not user or user.id == 690901325298401291:
@@ -152,7 +153,7 @@ async def on_message(message):
             user_dic[user.id] = 1
         print(f"{user.name}:{user_dic[user.id]}")
         member = message.guild.get_member(user.id)
-        await member.edit(nick = f"{user.name}║Point：{user_dic[user.id]}")
+        await member.edit(nick = f"[{user_dic[user.id]}]{user.name}")
         
     if message.content == "i)reward":
         user = message.author
