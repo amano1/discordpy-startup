@@ -237,7 +237,7 @@ async def on_message(message):
                 await message.channel.send(embed = embed)
                 r_flag = True
                 return
-            member = message.guild.member(user.id)
+            member = discord.utils.get(message.guild.members,id = user.id)
             await member.edit(nick = f"［0］{member.name}")
             embed = discord.Embed(
                 title = f"{user.name}に**{point}TCredit**を配布したよ！。\nおめでとう！(Pointがリセットされました)",
