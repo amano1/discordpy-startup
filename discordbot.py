@@ -228,7 +228,7 @@ async def on_message(message):
             r_flag = True
         else:        
             pattern = r"(\d{1,}) has been deducted"
-            result = re.search(pattern,resp)
+            result = re.search(pattern,resp.content)
             if not result:
                 embed = discord.Embed(
                     title = f"あちゃーごめん{user.name}。\nなんか報酬配布がうまくいかなかったわ",
