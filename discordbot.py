@@ -103,6 +103,7 @@ async def loop():
     global user_dic
     global user_list
     num = len(guild.members)
+    print("1")
     await client.change_presence(activity=discord.Game(name=f"{num}members"))
     await asyncio.sleep(2)
     await client.change_presence(activity=discord.Game(name=f"in this server"))
