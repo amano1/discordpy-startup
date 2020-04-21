@@ -99,17 +99,21 @@ async def on_ready():
         print("―――――――――――――――――――――――――――――――――――――")
 
         
-@tasks.loop(seconds=30)
+@tasks.loop(seconds=10)
 async def loop_30():
+    peinr(30)
+    '''
     global user_dic
     global user_list
     num = len(guild.members)
     await client.change_presence(activity=discord.Game(name=f"{num}members in this server║{datetime.now(JST)}"))
     user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
+    '''
 
-
-@tasks.loop(seconds=60)
+@tasks.loop(seconds=10)
 async def loop_60():
+    print(60)
+    '''
     global user_dic
     ch_1 = client.get_channel(701803530566238290)
     ch_2 = client.get_channel(701803756571983893)
@@ -126,7 +130,7 @@ async def loop_60():
     print(ch_1.name)
     print(ch_2.name)
     print(ch_3.name)
-
+    '''
 @client.event
 async def on_message(message):
     amano = client.get_user(690901325298401291)
