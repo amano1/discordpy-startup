@@ -130,7 +130,7 @@ async def loop():
         if num3_set[1] == 0:
             await ch_3.edit(name = f"🥉None")
             return
-        await ch_3.edit(name = f"🥇{num3_set[1]}|{user_3.name}") 
+        await ch_3.edit(name = f"🥉{num3_set[1]}|{user_3.name}") 
     print(ch_1.name)
     print(ch_2.name)
     print(ch_3.name)
@@ -208,7 +208,7 @@ async def on_message(message):
             r_flag = True
             return
         await ch.send(f"reward [{user.id}] [{user_dic[user.id]}]")
-        user_dic[user,id] = 0
+        user_dic[user.id] = 0
         def check(msg):
             if msg.author.id != 172002275412279296:
                 return 0
