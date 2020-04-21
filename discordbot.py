@@ -163,12 +163,8 @@ async def on_message(message):
         else:
             user_dic[user.id] = 1
         member = message.guild.get_member(user.id)
-        try:
-            await member.edit(nick = f"［{user_dic[user.id]}］{member.name}")
-        except:
-            pass
-        else:
-            pass
+        await member.edit(nick = f"［{user_dic[user.id]}］{member.name}")
+
     if message.content == "i)reward":
         ch_id = 701721786592657461
         ch = client.get_channel(ch_id)
