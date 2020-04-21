@@ -47,7 +47,7 @@ async def on_ready():
         pattern = r'^(\［\d{1,}］)'
         result = re.search(pattern,member.display_name)
         if result:
-            point = int(result.grupe(2))
+            point = int(result.group(2))
             user_dic[member.id]=point
             print(f"{member.name}:match [point]")
         elif not (member.id in id) or not member.bot:
