@@ -98,6 +98,7 @@ async def on_ready():
     
 @tasks.loop(seconds=30)
 async def loop_30():
+    global user_dic
     num = len(guild.members)
     await client.change_presence(activity=discord.Game(name=f"{num}members in this server"))
     user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
