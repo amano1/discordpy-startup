@@ -98,14 +98,6 @@ async def on_ready():
         print("―――――――――――――――――――――――――――――――――――――")
 
         
-        
-        
-        
-        
-        
-        
-        
-    
 @tasks.loop(seconds=30)
 async def loop_30():
 
