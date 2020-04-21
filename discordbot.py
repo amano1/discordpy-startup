@@ -32,6 +32,7 @@ user_list = []
 deleuser = None
 delech = None
 
+r_flag = True
 
 @client.event
 async def on_ready():
@@ -118,11 +119,11 @@ async def loop():
     await ch_1.edit(name = f"🥇{num1_set[1]}|{user_1.name}")
     await ch_2.edit(name = f"🥈{num2_set[1]}|{user_2.name}")
     await ch_3.edit(name = f"🥉{num3_set[1]}|{user_3.name}")
-    if num1_set[0] == 0:
+    if num1_set[1] == 0:
         await ch_1.edit(name = f"🥇None")
-    if num2_set[0] == 0:
+    if num2_set[1] == 0:
         await ch_2.edit(name = f"🥈None")
-    if num3_set[0] == 0:
+    if num3_set[1] == 0:
         await ch_3.edit(name = f"🥉None")
     print(ch_1.name)
     print(ch_2.name)
@@ -186,13 +187,18 @@ async def on_message(message):
         else:
             pass
             
-            
+    global r_flag
     if message.content == "i)reward":
+        if r_flag == False:
+            await message.channel.send("CoolDown中")
+            return
+        r_flag = False
         ch_id = 701721786592657461
         ch = client.get_channel(ch_id)
         user = message.author
         if {user_dic[user.id]} == 0:
             await message.channel.send("Pointが無いんだけど?")
+            r_flag = True
             return
         await ch.send(f"reward [{user.id}] [{user_dic[user.id]}]")
         user_dic[user,id] = 0
@@ -213,6 +219,7 @@ async def on_message(message):
                 title = f"あちゃーごめん{user.name}。\nなんか報酬配布がうまくいかなかったわ",
                 color = discord.Color.red())
             await message.channel.send(embed = embed)
+            r_flag = True
         else:        
             pattern = r":yen: (\d{1,}) has been deducted"
             result = re.search(pattern,resp)
@@ -221,6 +228,7 @@ async def on_message(message):
                     title = f"あちゃーごめん{user.name}。\nなんか報酬配布がうまくいかなかったわ",
                     color = discord.Color.red())
                 await message.channel.send(embed = embed)
+                r_flag = True
                 return
             if point != result.group(2):
                 member = message.guild.member(user.id)
@@ -229,6 +237,8 @@ async def on_message(message):
                     title = f"{user.name}に**{point}TCredit**を配布したよ！。\nおめでとう！(Pointがリセットされました)",
                     color = discord.Color.green())
                 await message.channel.send(embed = embed)
+                await asyncio.sleep(10)
+                r_flag = True
     
     global deleuser
     global delech
