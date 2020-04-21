@@ -202,7 +202,8 @@ async def on_message(message):
         ch_id = 701721786592657461
         ch = client.get_channel(ch_id)
         user = message.author
-        if {user_dic[user.id]} == 0:
+        point = user_dic[user.id]
+        if user_dic[user.id] == 0:
             await message.channel.send("Pointが無いんだけど?")
             r_flag = True
             return
@@ -236,15 +237,14 @@ async def on_message(message):
                 await message.channel.send(embed = embed)
                 r_flag = True
                 return
-            if point != int(result.group(2)):
-                member = message.guild.member(user.id)
-                await member.edit(nick = f"［0］{member.name}")
-                embed = discord.Embed(
-                    title = f"{user.name}に**{point}TCredit**を配布したよ！。\nおめでとう！(Pointがリセットされました)",
-                    color = discord.Color.green())
-                await message.channel.send(embed = embed)
-                await asyncio.sleep(10)
-                r_flag = True
+            member = message.guild.member(user.id)
+            await member.edit(nick = f"［0］{member.name}")
+            embed = discord.Embed(
+                title = f"{user.name}に**{point}TCredit**を配布したよ！。\nおめでとう！(Pointがリセットされました)",
+                color = discord.Color.green())
+            await message.channel.send(embed = embed)
+            await asyncio.sleep(10)
+            r_flag = True
     
     global deleuser
     global delech
