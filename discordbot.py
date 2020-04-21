@@ -177,7 +177,7 @@ async def on_message(message):
             return 1
         try:
             resp = await client.wait_for("message",timeout = 5,check = check)
-        axcept:
+        except:
             embed = discord.Embed(
                 title = f"あちゃーごめん{user.name}。\nなんか報酬配布がうまくいかなかったわ",
                 color = discord.Color.red())
