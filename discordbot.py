@@ -46,7 +46,7 @@ async def on_ready():
               446610711230152706]
         pattern = r'^(\［\d{1,}］)'
         result = re.search(pattern,member.display_name)
-        if result.grupe(2):
+        if result:
             point = int(result.grupe(2))
             user_dic[member.id]=point
             print(f"{member.name}:match [point]")
@@ -149,7 +149,7 @@ async def on_message(message):
         pattern = r"(.{1,})は(\d{1,})経験値を獲得したはず。"
         result = re.search(pattern,em_desc)
         print(result)
-        if not (result.group(1) and result.group(2)):
+        if not result:
             print("didnt match A")
             return
         mention = result.group(1)
