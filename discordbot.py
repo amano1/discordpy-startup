@@ -102,8 +102,8 @@ async def loop():
     print(datetime.now(JST))
     global user_dic
     global user_list
+    guild=client.get_guild(674983696977362965)
     num = len(guild.members)
-    print("1")
     await client.change_presence(activity=discord.Game(name=f"{num}members"))
     await asyncio.sleep(2)
     await client.change_presence(activity=discord.Game(name=f"in this server"))
