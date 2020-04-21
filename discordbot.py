@@ -147,11 +147,13 @@ async def on_message(message):
         pattern = r"(.{1,})は(\d{1,})経験値を獲得したはず。"
         result = re.sub(pattern,"match",em_desc)
         if result != "match":
+            print("didnt match A")
             return
         mention = result.group(1)
         exp = result.group(2)
         user = discord.utils.get(client.users,mention = mention)
         if not user:
+            print("didnt match B")
             return
         if user.id in user_dic:
             user_dic[user.id] = int(user_dic[user.id]) + 1
