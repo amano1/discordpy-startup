@@ -97,24 +97,6 @@ async def on_ready():
         loop_60.start()
         print("―――――――――――――――――――――――――――――――――――――")
 
-        num = len(guild.members)
-        await client.change_presence(activity=discord.Game(name=f"{num}members in this server"))
-        user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
-        ch_1 = client.get_channel(701803530566238290)
-        ch_2 = client.get_channel(701803756571983893)
-        ch_3 = client.get_channel(701803622811435028)
-        num1_set = list(list(user_list)[0])
-        num2_set = list(list(user_list)[1])
-        num3_set = list(list(user_list)[2])
-        user_1 = client.get_user(num1_set[0])
-        user_2 = client.get_user(num2_set[0])
-        user_3 = client.get_user(num3_set[0])
-        await ch_1.edit(name = f"🥇{num1_set[1]}|{user_1.name}")
-        await ch_2.edit(name = f"🥈{num2_set[1]}|{user_2.name}")
-        await ch_3.edit(name = f"🥉{num3_set[1]}|{user_3.name}")
-        print(ch_1.name)
-        print(ch_2.name)
-        print(ch_3.name)
         
         
         
@@ -126,7 +108,25 @@ async def on_ready():
     
 @tasks.loop(seconds=30)
 async def loop_30():
-    pass
+
+    num = len(guild.members)
+    await client.change_presence(activity=discord.Game(name=f"{num}members in this server║{datetime.now(JST)}"))
+    user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
+    ch_1 = client.get_channel(701803530566238290)
+    ch_2 = client.get_channel(701803756571983893)
+    ch_3 = client.get_channel(701803622811435028)
+    num1_set = list(list(user_list)[0])
+    num2_set = list(list(user_list)[1])
+    num3_set = list(list(user_list)[2])
+    user_1 = client.get_user(num1_set[0])
+    user_2 = client.get_user(num2_set[0])
+    user_3 = client.get_user(num3_set[0])
+    await ch_1.edit(name = f"🥇{num1_set[1]}|{user_1.name}")
+    await ch_2.edit(name = f"🥈{num2_set[1]}|{user_2.name}")
+    await ch_3.edit(name = f"🥉{num3_set[1]}|{user_3.name}")
+    print(ch_1.name)
+    print(ch_2.name)
+    print(ch_3.name)
 
 @tasks.loop(seconds=60)
 async def loop_60():
