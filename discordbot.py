@@ -93,19 +93,18 @@ async def on_ready():
         await ready_ch.send(embed = embed)
         num = len(guild.members)
         await client.change_presence(activity=discord.Game(name=f"{num}members in this server"))
-
-        loop_30.start()
+        loop.start()
         print("―――――――――――――――――――――――――――――――――――――")
 
         
 @tasks.loop(seconds=10)
-async def loop_30():
-    peinr(datetime.now(JST))
+async def loop():
+    print(datetime.now(JST))
     global user_dic
     global user_list
+    '''
     num = len(guild.members)
     await client.change_presence(activity=discord.Game(name=f"{num}members in this server║{datetime.now(JST)}"))
-    '''
     user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
     ch_1 = client.get_channel(701803530566238290)
     ch_2 = client.get_channel(701803756571983893)
