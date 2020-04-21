@@ -103,7 +103,9 @@ async def loop():
     global user_dic
     global user_list
     num = len(guild.members)
-    await client.change_presence(activity=discord.Game(name=f"{num}members in this server║{datetime.now(JST)}"))
+    await client.change_presence(activity=discord.Game(name=f"{num}members"))
+    await asyncio.sleep(2)
+    await client.change_presence(activity=discord.Game(name=f"in this server"))
     '''
     user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
     ch_1 = client.get_channel(701803530566238290)
