@@ -98,6 +98,7 @@ async def on_ready():
     
 @tasks.loop(seconds=30)
 async def loop_30():
+    print("―――――――――――――――――――――――――――――――――――――")
     global user_dic
     num = len(guild.members)
     await client.change_presence(activity=discord.Game(name=f"{num}members in this server"))
@@ -114,7 +115,6 @@ async def loop_30():
     await ch_1.edit(name = f"🥇{num1_set[1]}|{user_1.name}")
     await ch_2.edit(name = f"🥈{num2_set[1]}|{user_2.name}")
     await ch_3.edit(name = f"🥉{num3_set[1]}|{user_3.name}")
-    print("―――――――――――――――――――――――――――――――――――――")
     print(ch_1.name)
     print(ch_2.name)
     print(ch_3.name)
