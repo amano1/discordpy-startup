@@ -165,11 +165,20 @@ async def on_message(message):
         if not user:
             print("didnt match B")
             return
+        pattern = r'^(\［(\d{1,})］)'
+        member = message.guild.get_member(user.id)
+        result_2 = re.search(pattern,member.display_name)
+        if not result_2:
+            user_dic[user.id] = 1 
+            try:
+                await member.edit(nick = f"［0］{member.name}")
+            except:
+                pass
+            else:
+                pass
+            return
         if user.id in user_dic:
             user_dic[user.id] = int(user_dic[user.id]) + 1
-        else:
-            user_dic[user.id] = 1
-        member = message.guild.get_member(user.id)
         try:
             await member.edit(nick = f"［{user_dic[user.id]}］{member.name}")
         except:
