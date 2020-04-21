@@ -44,7 +44,7 @@ async def on_ready():
         id = [446610711230152706,
               690901325298401291,
               446610711230152706]
-        pattern = r'^(\［\d{1,}］)'
+        pattern = r'^(\［(\d{1,})］)'
         result = re.search(pattern,member.display_name)
         if result:
             point = int(result.group(2))
