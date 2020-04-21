@@ -49,7 +49,9 @@ async def on_ready():
         if result == "match":
             point = int(result.grupe(2))
             user_dic[member.id]=point
+            print(f"{member.name}:match [point]")
         elif not (member.id in id) or not member.bot:
+            print(f"{member.name}:didnt match")
             user_dic[member.id]=0
             try:
                 await member.edit(nick = f"［0］{member.name}")
@@ -166,7 +168,11 @@ async def on_message(message):
         ch_id = 701721786592657461
         ch = client.get_channel(ch_id)
         user = message.author
+        if {user_dic[user.id]} == 0:
+            await message.channel.send("Pointが無いんだけど?")
+            return
         await ch.send(f"reward [{user.id}] [{user_dic[user.id]}]")
+        user_dic[user,id] = 0
         def check(msg):
             if msg.author.id != 172002275412279296:
                 return 0
