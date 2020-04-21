@@ -98,10 +98,6 @@ async def on_ready():
     
 @tasks.loop(seconds=30)
 async def loop_30():
-    pass
-    
-@tasks.loop(seconds=60)
-async def loop_60():
     num = len(guild.members)
     await client.change_presence(activity=discord.Game(name=f"{num}members in this server"))
     user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
@@ -117,6 +113,10 @@ async def loop_60():
     await ch_1.edit(name = f"🥇{num1_set[1]}║{user_1.name}")
     await ch_2.edit(name = f"🥈{num2_set[1]}║{user_2.name}")
     await ch_3.edit(name = f"🥉{num3_set[1]}║{user_3.name}")
+    
+@tasks.loop(seconds=60)
+async def loop_60():
+    pass
 
 @client.event
 async def on_message(message):
@@ -148,7 +148,6 @@ async def on_message(message):
         em_desc = message.embeds[0].description
         pattern = r"(.{1,})は(\d{1,})経験値を獲得"
         result = re.search(pattern,em_desc)
-        print(result)
         if not result:
             print("didnt match A")
             return
