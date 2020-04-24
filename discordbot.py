@@ -208,7 +208,6 @@ async def on_message(message):
             r_flag = True
             return
         await ch.send(f"reward [{user.id}] [{user_dic[user.id]}]")
-        user_dic[user.id] = 0
         def check(msg):
             if msg.author.id != 172002275412279296:
                 return 0
@@ -239,6 +238,7 @@ async def on_message(message):
                 return
             member = discord.utils.get(message.guild.members,id = user.id)
             await member.edit(nick = f"［0］{member.name}")
+            user_dic[user.id] = 0
             embed = discord.Embed(
                 title = f"{user.name}に**{point}TCredit**を配布したよ！。\nおめでとう！(Pointがリセットされました)",
                 color = discord.Color.green())
