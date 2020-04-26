@@ -142,9 +142,10 @@ async def on_message(message):
         pattern_a = r"属性:\[(.+)] \| ランク:【(.+)】(.+)が待ち構えている...！Lv\.(\d+)  HP:(\d+)"
         pattern_b = r"(.{1,})は(\d{1,})経験値を獲得"
         result_a = re.search(pattern_a,em_title.replace("\n",""))
-        print(f"result:{result_a}")
+        print(em_title.replace("\n",""))
+        print(f"result_a:{result_a}")
         result_b = re.search(pattern_b,em_desc)
-        print(f"result:{result_b}")
+        print(f"result_b:{result_b}")
         if result_a:
             result= result_a
             ch = client.get_channel(703821795387768832)
