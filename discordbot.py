@@ -252,8 +252,7 @@ async def on_message(message):
     if message.content=='i)deleNone':
         delech=None
         deleuser=None
-    
-    
+
 @client.event:
 async def on_member_join(member): 
     embed = discord.Embed(
