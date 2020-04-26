@@ -187,7 +187,6 @@ async def on_message(message):
                 await ch.edit(name = f"超激レア║{num + 1}")
                 embed = discord.Embed(
                     title = "超激レア出現！",)
-                await 
      
         if result_b:
             result = result_b
