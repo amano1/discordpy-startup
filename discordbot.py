@@ -140,12 +140,11 @@ async def on_message(message):
         em_desc = message.embeds[0].description
         pattern_a = r"属性:\[(.+)] \| ランク:【(.+)】(.+)が待ち構えている...！\nLv\.(\d+)  HP:(\d+)" 
         pattern_b = r"(.{1,})は(\d{1,})経験値を獲得"
-        print(em_title)
-        print(em_title.replace("\n",""))
         result_a = re.search(pattern_a,em_title.replace("\n",""))
+        print(result_a)
         result_b = re.search(pattern_b,em_desc)
+        print(result_a)
         if result_a:
-            print(result_a)
             result= result_a
             ch = client.get_channel(703821795387768832)
             if result.group(2) == "超激レア":
