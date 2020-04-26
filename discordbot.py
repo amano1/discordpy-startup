@@ -64,13 +64,14 @@ async def loop():
         id = [446610711230152706,690901325298401291,
               644153226597498890,697262684227371059,
               526620171658330112,172002275412279296,
-              674982292111884300,627052576810074112,]
+              674982292111884300,627052576810074112,
+              ,]
         pattern = r'^(\［(\d{1,})］)'
         result = re.search(pattern,member.display_name)
         if result:
             point = int(result.group(2))
             user_dic[member.id]=point
-        elif not (member.id in id) or not member.bot:
+        elif not member.id in id:
             print(f"{member.name}:didnt match")
             user_dic[member.id]=0
             try:
