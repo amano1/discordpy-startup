@@ -136,7 +136,7 @@ async def loop():
     ch_mob = client.get_channel(703822197139177495)
     mob_num_sub = mob_num
     num = int(ch_mob.name.split("エネミー║")[1])
-    if mob_num == 0"
+    if mob_num == 0
         return
     await ch_mob.edit(name = f"エネミー║{num+mob_num}")
     mob_num -= mob_num_sub
