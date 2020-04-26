@@ -34,9 +34,6 @@ delech = None
 
 r_flag = True
 
-class Mob:
-    self.mob_dic = {}
-
 @client.event
 async def on_ready():
     await client.change_presence(activity=discord.Game(name="起動中( ˘ω˘ ) ｽﾔｧ…"))
