@@ -37,66 +37,21 @@ r_flag = True
 @client.event
 async def on_ready():
     await client.change_presence(activity=discord.Game(name="起動中( ˘ω˘ ) ｽﾔｧ…"))
-    
     #メンバーとpointのリスト作成
-    global user_dic
     guild = client.get_guild(674983696977362965)
     members = list(guild.members)
-    for member in members:
-        id = [446610711230152706,
-              690901325298401291,
-              446610711230152706]
-        pattern = r'^(\［(\d{1,})］)'
-        result = re.search(pattern,member.display_name)
-        if result:
-            point = int(result.group(2))
-            user_dic[member.id]=point
-            print(f"{member.name}:match [point]")
-        elif not (member.id in id) or not member.bot:
-            print(f"{member.name}:didnt match")
-            user_dic[member.id]=0
-            try:
-                await member.edit(nick = f"［0］{member.name}")
-            except:
-                print(f"❌┃{member}のニックネームを変更できませんでした")
-            else:
-                print(f"⭕┃{member}のニックネームにPoint:0を追加")
-    else:
-        user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
-        print(user_list)
-        ch_1 = client.get_channel(701803530566238290)
-        ch_2 = client.get_channel(701803756571983893)
-        ch_3 = client.get_channel(701803622811435028)
-        num1_set = list(list(user_list)[0])
-        num2_set = list(list(user_list)[1])
-        num3_set = list(list(user_list)[2])
-        print(num1_set)
-        print(num2_set)
-        print(num3_set)
-        user_1 = client.get_user(num1_set[0])
-        user_2 = client.get_user(num2_set[0])
-        user_3 = client.get_user(num3_set[0])
-        await ch_1.edit(name = f"🥇{num1_set[1]}|{user_1.name}")
-        await ch_2.edit(name = f"🥈{num2_set[1]}|{user_2.name}")
-        await ch_3.edit(name = f"🥉{num3_set[1]}|{user_3.name}")
-        print(ch_1.name)
-        print(ch_2.name)
-        print(ch_3.name)
-        
-        
-        #起動ログを指定のチャンネルに送信
-        ready_chid = 701739744320553015
-        ready_ch = client.get_channel(ready_chid)
-        dateTime = datetime.now(JST)
-        embed = discord.Embed(
-            title = "起動ログ",
-            description = f"{dateTime}")
-        await ready_ch.send(embed = embed)
-        num = len(guild.members)
-        await client.change_presence(activity=discord.Game(name=f"{num}members in this server"))
-        loop.start()
-        print("―――――――――――――――――――――――――――――――――――――")
-
+    user_dic = {}
+    #起動ログを指定のチャンネルに送信
+    ready_chid = 701739744320553015
+    ready_ch = client.get_channel(ready_chid)
+    dateTime = datetime.now(JST)
+    embed = discord.Embed(
+        title = "起動ログ",
+        description = f"{dateTime}")
+    await ready_ch.send(embed = embed)
+    num = len(guild.members)
+    await client.change_presence(activity=discord.Game(name=f"{num}members in this server"))
+    loop.start()
         
 @tasks.loop(seconds=10)
 async def loop():
@@ -184,35 +139,46 @@ async def on_message(message):
             return
         em_title = message.embeds[0].title
         em_desc = message.embeds[0].description
-        pattern = r"(.{1,})は(\d{1,})経験値を獲得"
-        result = re.search(pattern,em_desc)
-        if not result:
-            return
-        mention = result.group(1)
-        exp = result.group(2)
-        user = discord.utils.get(client.users,mention = mention)
-        if not user or user == amano:
-            return
-        pattern = r'^(\［(\d{1,})］)'
-        member = message.guild.get_member(user.id)
-        result_2 = re.search(pattern,member.display_name)
-        if not result_2:
-            user_dic[user.id] = 1 
+        pattern_a = r"属性:\[(.+)] \| ランク:【(.+)】(.+)が待ち構えている...！Lv\.(\d+)  HP:(\d+)" 
+        pattern_b = r"(.{1,})は(\d{1,})経験値を獲得"
+        result_a = re.search(pattern_a,em_title.replace("\n",""))
+        result_b = re.search(pattern_b,em_desc)
+        if result_a:
+            result= result_a
+            ch = client.get_channel(703821795387768832)
+            if result.group(2) == "超激レア":
+                num = int(ch.name.split("超激レア║")[1])
+                await ch.edit(name = f"超激レア║{num + 1}")
+            ch_mob = client.get_channel(703822197139177495)
+            num = int(ch.name.split("エネミー║")[1])
+            await ch.edit(name = f"エネミー║{num + 1}")        
+        if result_b:
+            result = result_b
+            mention = result.group(1)
+            exp = result.group(2)
+            user = discord.utils.get(client.users,mention = mention)
+            if not user or user == amano:
+                return
+            pattern = r'^(\［(\d{1,})］)'
+            member = message.guild.get_member(user.id)
+            result_2 = re.search(pattern,member.display_name)
+            if not result_2:
+                user_dic[user.id] = 1 
+                try:
+                    await member.edit(nick = f"［0］{member.name}")
+                except:
+                    pass
+                else:
+                    pass
+                return
+            if user.id in user_dic:
+                user_dic[user.id] = int(user_dic[user.id]) + 1
             try:
-                await member.edit(nick = f"［0］{member.name}")
+                await member.edit(nick = f"［{user_dic[user.id]}］{member.name}")
             except:
                 pass
             else:
                 pass
-            return
-        if user.id in user_dic:
-            user_dic[user.id] = int(user_dic[user.id]) + 1
-        try:
-            await member.edit(nick = f"［{user_dic[user.id]}］{member.name}")
-        except:
-            pass
-        else:
-            pass
             
     global r_flag
     if message.content == "i)reward":
