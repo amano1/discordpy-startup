@@ -82,7 +82,6 @@ async def loop():
     num = len(guild.members)
     await client.change_presence(activity=discord.Game(name=f"{num}members"))
     user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
-    print(user_list)
     ch_1 = client.get_channel(701803530566238290)
     ch_2 = client.get_channel(701803756571983893)
     ch_3 = client.get_channel(701803622811435028)
@@ -144,6 +143,7 @@ async def on_message(message):
         result_a = re.search(pattern_a,em_title.replace("\n",""))
         result_b = re.search(pattern_b,em_desc)
         if result_a:
+            print(result_a)
             result= result_a
             ch = client.get_channel(703821795387768832)
             if result.group(2) == "超激レア":
