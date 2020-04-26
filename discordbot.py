@@ -175,8 +175,6 @@ async def on_message(message):
         pattern_b = r"(.{1,})は(\d{1,})経験値を獲得"
         result_a = re.search(pattern_a,em_title)
         result_b = re.search(pattern_b,em_desc)
-        print(f"result_a:{result_a}")
-        print(f"result_b:{result_b}")
         if result_a:
             global mob_num
             mob_num += 1
