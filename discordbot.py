@@ -137,6 +137,8 @@ async def loop():
 async def on_message(message):
     amano = client.get_user(690901325298401291)
     global user_dic
+    if not message.channel.guild:
+        return
     
     if message.content.startswith("i)point "):
         u = None
@@ -165,6 +167,8 @@ async def on_message(message):
         pattern_b = r"(.{1,})は(\d{1,})経験値を獲得"
         result_a = re.search(pattern_a,em_title.replace("\n",""))
         result_b = re.search(pattern_b,em_desc)
+        print(f"result_a:{result_a}")
+        print(f"result_b:{result_b}")
         if result_a:
             result= result_a
             ch = client.get_channel(703821795387768832)
