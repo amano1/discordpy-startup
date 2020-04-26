@@ -34,6 +34,8 @@ delech = None
 
 r_flag = True
 
+mob_num = 0
+
 @client.event
 async def on_ready():
     await client.change_presence(activity=discord.Game(name="起動中( ˘ω˘ ) ｽﾔｧ…"))
@@ -79,6 +81,7 @@ async def on_member_remove(member):
 async def loop():
     global user_dic
     global user_list
+    global mob_num
     guild = client.get_guild(674983696977362965)
     members = list(guild.members)
     for member in members:
@@ -132,6 +135,11 @@ async def loop():
             return
         await ch_3.edit(name = f"🥉{num3_set[1]}|{user_3.name}") 
         print(ch_3.name)
+    ch_mob = client.get_channel(703822197139177495)
+    mob_num_sub = mob_num
+    num = int(ch_mob.name.split("エネミー║")[1])
+    await ch_mob.edit(name = f"エネミー║{mob_num}")
+    mob_num -= mob_num_sub
     
 @client.event
 async def on_message(message):
@@ -163,21 +171,24 @@ async def on_message(message):
             em_title = message.embeds[0].title
         if message.embeds[0].description:
             em_desc = message.embeds[0].description
-        pattern_a = r"^属性:\[(.+)] \| ランク:【(.+)】"
+        pattern_a = r"^属性:\[(.+)] \| ランク:【(.+)】\n(.+)が待ち構えている...！\nLv\.(\d+)  HP:(\d+)"
         pattern_b = r"(.{1,})は(\d{1,})経験値を獲得"
         result_a = re.search(pattern_a,em_title)
         result_b = re.search(pattern_b,em_desc)
         print(f"result_a:{result_a}")
         print(f"result_b:{result_b}")
         if result_a:
+            global mob_num
+            mob_num += 1
             result= result_a
             ch = client.get_channel(703821795387768832)
             if result.group(2) == "超激レア":
                 num = int(ch.name.split("超激レア║")[1])
                 await ch.edit(name = f"超激レア║{num + 1}")
-            ch_mob = client.get_channel(703822197139177495)
-            num = int(ch_mob.name.split("エネミー║")[1])
-            await ch_mob.edit(name = f"エネミー║{num + 1}")        
+                embed = discord.Embed(
+                    title = "超激レア出現！",)
+                await 
+     
         if result_b:
             result = result_b
             mention = result.group(1)
