@@ -133,12 +133,12 @@ async def on_message(message):
         
 
     if message.embeds and message.channel.category.id == 674983811850960916:
-        if not message.embeds[0].title:
-            return
-        if not message.embeds[0].description:
-            return
-        em_title = message.embeds[0].title
-        em_desc = message.embeds[0].description
+        em_title = None
+        em_desc = None
+        if message.embeds[0].title:
+            em_title = message.embeds[0].title
+        if message.embeds[0].description:
+            em_desc = message.embeds[0].description
         pattern_a = r"属性:\[(.+)] \| ランク:【(.+)】"
         pattern_b = r"(.{1,})は(\d{1,})経験値を獲得"
         result_a = re.search(pattern_a,em_title)
