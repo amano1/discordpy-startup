@@ -61,9 +61,10 @@ async def loop():
     guild = client.get_guild(674983696977362965)
     members = list(guild.members)
     for member in members:
-        id = [446610711230152706,
-              690901325298401291,
-              446610711230152706]
+        id = [446610711230152706,690901325298401291,
+              644153226597498890,697262684227371059,
+              526620171658330112,172002275412279296,
+              674982292111884300,627052576810074112,]
         pattern = r'^(\［(\d{1,})］)'
         result = re.search(pattern,member.display_name)
         if result:
