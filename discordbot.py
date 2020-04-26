@@ -79,9 +79,7 @@ async def on_member_remove(member):
     await ch_2.send(f"{member.mention}がAMSを去りました、( ´Д｀)ﾉ~ﾊﾞｲﾊﾞｲ")
 @tasks.loop(seconds=10)
 async def loop():
-    global user_dic
-    global user_list
-    global mob_num
+    global user_dic,user_list,mob_num
     guild = client.get_guild(674983696977362965)
     members = list(guild.members)
     for member in members:
@@ -138,7 +136,7 @@ async def loop():
     ch_mob = client.get_channel(703822197139177495)
     mob_num_sub = mob_num
     num = int(ch_mob.name.split("エネミー║")[1])
-    await ch_mob.edit(name = f"エネミー║{mob_num}")
+    await ch_mob.edit(name = f"エネミー║{num+mob_num}")
     mob_num -= mob_num_sub
     
 @client.event
