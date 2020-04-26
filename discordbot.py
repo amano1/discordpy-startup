@@ -184,7 +184,14 @@ async def on_message(message):
                 num = int(ch.name.split("超激レア║")[1])
                 await ch.edit(name = f"超激レア║{num + 1}")
                 embed = discord.Embed(
-                    title = "超激レア出現！",)
+                    title = "超激レア出現！",
+                    description = (
+                        f"@Member\n{message.channel.mention}で**{result.group(3)}**が出現したよ！" +
+                        f"\nLv.{result.group(3)}　HP：{result.group(4)}" +
+                        f"[この{result.group(3)}への直通リンク](message.jump_url)")
+                embed.set_thumbnail(url = message.embeds[0].image.url)
+                ch = client.get_channel(703900018406457415)
+                await ch.send(embed = embed)
      
         if result_b:
             result = result_b
