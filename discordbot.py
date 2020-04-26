@@ -176,8 +176,8 @@ async def on_message(message):
                 num = int(ch.name.split("超激レア║")[1])
                 await ch.edit(name = f"超激レア║{num + 1}")
             ch_mob = client.get_channel(703822197139177495)
-            num = int(ch.name.split("エネミー║")[1])
-            await ch.edit(name = f"エネミー║{num + 1}")        
+            num = int(ch_mob.name.split("エネミー║")[1])
+            await ch_mob.edit(name = f"エネミー║{num + 1}")        
         if result_b:
             result = result_b
             mention = result.group(1)
