@@ -55,7 +55,6 @@ async def on_ready():
         
 @tasks.loop(seconds=10)
 async def loop():
-    print(datetime.now(JST))
     global user_dic
     global user_list
     guild = client.get_guild(674983696977362965)
