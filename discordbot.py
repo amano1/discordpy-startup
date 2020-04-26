@@ -140,6 +140,7 @@ async def on_message(message):
         em_desc = message.embeds[0].description
         pattern_a = r"属性:\[(.+)] \| ランク:【(.+)】(.+)が待ち構えている...！\nLv\.(\d+)  HP:(\d+)" 
         pattern_b = r"(.{1,})は(\d{1,})経験値を獲得"
+        print(em_title)
         print(em_title.replace("\n",""))
         result_a = re.search(pattern_a,em_title.replace("\n",""))
         result_b = re.search(pattern_b,em_desc)
