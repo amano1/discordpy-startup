@@ -133,19 +133,16 @@ async def on_message(message):
         
 
     if message.embeds and message.channel.category.id == 674983811850960916:
-        em_title = None
-        em_desc = None
+        em_title = "None"
+        em_desc = "None"
         if message.embeds[0].title:
             em_title = message.embeds[0].title
         if message.embeds[0].description:
             em_desc = message.embeds[0].description
-        pattern_a = r"属性:\[(.+)] \| ランク:【(.+)】"
+        pattern_a = r"属性:\[(.+)] \| ランク:【(.+)】属性:\[(.+)] \| ランク:【(.+)】(.+)が待ち構えている...！Lv\.(\d+)  HP:(\d+)"
         pattern_b = r"(.{1,})は(\d{1,})経験値を獲得"
-        result_a = re.search(pattern_a,em_title)
-        print(em_title.replace("\n",""))
-        print(f"result_a:{result_a}")
+        result_a = re.search(pattern_a,em_title.replace("\n",""))
         result_b = re.search(pattern_b,em_desc)
-        print(f"result_b:{result_b}")
         if result_a:
             result= result_a
             ch = client.get_channel(703821795387768832)
