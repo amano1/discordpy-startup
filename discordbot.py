@@ -145,6 +145,7 @@ async def loop():
 async def on_message(message):
     amano = client.get_user(690901325298401291)
     global user_dic
+    guild = client.get_guild(674983696977362965)
     if not message.channel.guild:
         return
     
@@ -183,12 +184,13 @@ async def on_message(message):
             if result.group(2) == "超激レア":
                 num = int(ch.name.split("超激レア║")[1])
                 await ch.edit(name = f"超激レア║{num + 1}")
+                role = discord.utils.get(guild.roles,id = 701963908461887568)
                 embed = discord.Embed(
                     title = "超激レア出現！",
                     description = (
-                        f"@Member\n{message.channel.mention}で**{result.group(3)}**が出現したよ！" +
-                        f"\nLv.{result.group(3)}　HP：{result.group(4)}" +
-                        f"[この{result.group(3)}への直通リンク](message.jump_url)"))
+                        f"{role.mention}\n{message.channel.mention}で**{result.group(3)}**が出現したよ！" +
+                        f"\nLv：{result.group(4)}\nHP：{result.group(4)}\nExp：{int(result.gropu(4)) * 100}" +
+                        f"\n[この{result.group(3)}への直通リンク](message.jump_url)"))
                 embed.set_thumbnail(url = message.embeds[0].image.url)
                 ch = client.get_channel(703900018406457415)
                 await ch.send(embed = embed)
