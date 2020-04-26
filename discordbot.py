@@ -94,11 +94,15 @@ async def loop():
     if ch_1.name != f"🥇{num1_set[1]}|{user_1.name}":
         if num1_set[1] == 0:
             await ch_1.edit(name = f"🥇None")
+            print(ch_1.name)
+            print(ch_2.name)
             return
         await ch_1.edit(name = f"🥇{num1_set[1]}|{user_1.name}")
     if ch_2.name != f"🥈{num1_set[1]}|{user_2.name}":
         if num2_set[1] == 0:
             await ch_2.edit(name = f"🥈None")
+            print(ch_1.name)
+            print(ch_2.name)
             return
         await ch_2.edit(name = f"🥈{num2_set[1]}|{user_2.name}")
     if ch_3.name != f"🥉{num3_set[1]}|{user_3.name}":
@@ -106,9 +110,7 @@ async def loop():
             await ch_3.edit(name = f"🥉None")
             return
         await ch_3.edit(name = f"🥉{num3_set[1]}|{user_3.name}") 
-    print(ch_1.name)
-    print(ch_2.name)
-    print(ch_3.name)
+        print(ch_3.name)
     
 @client.event
 async def on_message(message):
