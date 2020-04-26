@@ -34,6 +34,9 @@ delech = None
 
 r_flag = True
 
+class Mob:
+    self.mob_dic = {}
+
 @client.event
 async def on_ready():
     await client.change_presence(activity=discord.Game(name="起動中( ˘ω˘ ) ｽﾔｧ…"))
@@ -103,10 +106,31 @@ async def loop():
     print(datetime.now(JST))
     global user_dic
     global user_list
-    guild=client.get_guild(674983696977362965)
+    guild = client.get_guild(674983696977362965)
+    members = list(guild.members)
+    for member in members:
+        id = [446610711230152706,
+              690901325298401291,
+              446610711230152706]
+        pattern = r'^(\［(\d{1,})］)'
+        result = re.search(pattern,member.display_name)
+        if result:
+            point = int(result.group(2))
+            user_dic[member.id]=point
+            print(f"{member.name}:match [point]")
+        elif not (member.id in id) or not member.bot:
+            print(f"{member.name}:didnt match")
+            user_dic[member.id]=0
+            try:
+                await member.edit(nick = f"［0］{member.name}")
+            except:
+                print(f"❌┃{member}のニックネームを変更できませんでした")
+            else:
+                print(f"⭕┃{member}のニックネームにPoint:0を追加")
     num = len(guild.members)
     await client.change_presence(activity=discord.Game(name=f"{num}members"))
     user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
+    print(user_list)
     ch_1 = client.get_channel(701803530566238290)
     ch_2 = client.get_channel(701803756571983893)
     ch_3 = client.get_channel(701803622811435028)
@@ -239,6 +263,7 @@ async def on_message(message):
             member = discord.utils.get(message.guild.members,id = user.id)
             await member.edit(nick = f"［0］{member.name}")
             user_dic[user.id] = 0
+            print(user_dic[user.id])
             embed = discord.Embed(
                 title = f"{user.name}に**{point}TCredit**を配布したよ！。\nおめでとう！(Pointがリセットされました)",
                 color = discord.Color.green())
