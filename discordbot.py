@@ -69,7 +69,6 @@ async def loop():
         if result:
             point = int(result.group(2))
             user_dic[member.id]=point
-            print(f"{member.name}:match [point]")
         elif not (member.id in id) or not member.bot:
             print(f"{member.name}:didnt match")
             user_dic[member.id]=0
