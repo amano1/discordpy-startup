@@ -254,4 +254,27 @@ async def on_message(message):
         deleuser=None
     
     
+@client.event:
+async def on_member_join(member): 
+    embed = discord.Embed(
+        title = "Amano's Macro Serverへようこそ！！",
+        description = "まずは[ホームページ](https://tsukumoshimo.wixsite.com/amsserver)を確認してね！^w^)9",
+        color = discord.Color.green())
+    await member.send(embed = embed)
+    ch = client.get_channel(681211296297123956)
+    ch_2 = client.get_channel(674983698080202797)
+    await ch.send(f"{member.mention}が入船しました。現在錨泊中です。")
+    await ch_2.send(f"{member.mention}が入船しました。現在錨泊中です。")
+    embed = discord.Embed(
+        title = "招待状が届きました!!",
+        description = "[🎫](https://discord.gg/PeV2tek)←クリック")
+    await member.send(embed = embed)
+    
+@client.event:
+async def on_member_remove(member): 
+    ch = client.get_channel(681211296297123956)
+    ch_2 = client.get_channel(674983698080202797)
+    await ch.send(f"{member.mention}がAMSを去りました、( ´Д｀)ﾉ~ﾊﾞｲﾊﾞｲ")
+    await ch_2.send(f"{member.mention}がAMSを去りました、( ´Д｀)ﾉ~ﾊﾞｲﾊﾞｲ")
+    
 client.run(TOKEN)
