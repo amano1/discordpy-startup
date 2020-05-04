@@ -75,8 +75,8 @@ async def on_member_join(member):
 async def on_member_remove(member): 
     ch = client.get_channel(681211296297123956)
     ch_2 = client.get_channel(674983698080202797)
-    await ch.send(f"{member.mention}がAMSを去りました、( ´Д｀)ﾉ~ﾊﾞｲﾊﾞｲ")
-    await ch_2.send(f"{member.mention}がAMSを去りました、( ´Д｀)ﾉ~ﾊﾞｲﾊﾞｲ")
+    await ch.send(f"{member.mention}({member})がAMSを去りました、( ´Д｀)ﾉ~ﾊﾞｲﾊﾞｲ")
+    await ch_2.send(f"{member.mention}({member})がAMSを去りました、( ´Д｀)ﾉ~ﾊﾞｲﾊﾞｲ")
 @tasks.loop(seconds=10)
 async def loop():
     global user_dic,user_list,mob_num
@@ -149,21 +149,6 @@ async def on_message(message):
     if not message.channel.guild:
         return
     
-    if message.content.startswith("i)point "):
-        u = None
-        try:
-            user_id = int(message.content.split("i)point ")[1])
-        except:        
-            user_mention = message.content.split("i)point ")[1]
-            u = discord.utils.get(message.guild.members,mention = user_mention)
-        else:
-            u = client.get_user(user_id)
-        user = u
-        if user:
-            point = user_dic[user.id]
-            embed = discord.Embed(
-                title = f"{user}さんのPointは{point}です")
-        
 
     if message.embeds and message.channel.category.id == 674983811850960916:
         em_title = "None"
@@ -192,7 +177,7 @@ async def on_message(message):
                         f"\nLv：{result.group(4)}\nHP：{result.group(4)}\nExp：{int(result.gropu(4)) * 100}" +
                         f"\n[この{result.group(3)}への直通リンク](message.jump_url)"))
                 embed.set_thumbnail(url = message.embeds[0].image.url)
-                ch = client.get_channel(703900018406457415)
+                ch = client.get_channel(706931443875708958)
                 await ch.send(embed = embed)
      
         if result_b:
@@ -224,6 +209,19 @@ async def on_message(message):
                 pass
             
     global r_flag
+    if message.content == "i)mlist":
+        num = 0
+        for ms in itertools.izip_longest(*[iter(client.user)]*10):
+            text = " "
+            for m in ms:
+                text += f"\n{m}"
+            embed = discord.Embed(
+                title = f"AMSメンバーリスト(len{client.uaer}人)",
+                description = text)
+            await message.channel.send(embed = embed)
+            
+            
+                
     if message.content == "i)reward":
         if r_flag == False:
             await message.channel.send("CoolDown中")
