@@ -176,7 +176,7 @@ async def on_message(message):
                     title = "超激レア出現！",
                     description = (
                         f"{role.mention}\n{message.channel.mention}で**{result.group(3)}**が出現したよ！" +
-                        f"\nLv：{result.group(4)}\nHP：{result.group(4)}\nExp：{int(result.gropu(4)) * 100}" +
+                        f"\nLv：{result.group(4)}\nHP：{result.group(4)}\nExp：{int(result.group(4)) * 100}" +
                         f"\n[この{result.group(3)}への直通リンク](message.jump_url)"))
                 embed.set_thumbnail(url = message.embeds[0].image.url)
                 ch = client.get_channel(706931443875708958)
@@ -228,24 +228,47 @@ async def on_message(message):
             embed.set_footer(text = f"{mnum_s}~{mnum_e}/{len(guild.members)}人")
             await message.channel.send(embed = embed)
             text = "" 
+
+    if message.channel.id == 707267427624288268:
+        await message.delete()
+        if message.author == amano:
+            role = message.guild.get_role(707270363167326260)
+            embed = discord.Embed(
+                title = "",
+                description = f"{message.content}\n{role.mention}",
+                color = discord.Color.blue()))
+            embed.set_author(name = amano,icon_url = amano.avatar_url)
+        embed = discord.Embed(
+            title = "",
+            description = f"message.content",
+            color = discord.Color.green()))
+        embed.set_author(name = message.author,icon_url = message.author.avatar_url)
+        embed.timestump = datetime.now(JST)
+        await message.channel.send(embed = embed)
+
+
             
     if message.content == "i)超激レア通知":
         role = message.guild.get_role(706527459067297864)
+        m = message.guild.get_member(message.author.id)
         try:
-            await message.author.add_role(role)
+            await m.add_roles(role)
         except:
             await message.channel.send("エラー出たw")     
         else:
             await message.channel.send(f"{message.author.mention}に超激レア通知役職をつけたよ(　•̀ω•́)و✧")   
             
+            
     if message.content == "i)tsubuyaki":
         role = message.guild.get_role(707270363167326260)
+        m = message.guild.get_member(message.author.id)
         try:
-            await message.author.add_role(role)
+            await m.add_roles(role)
         except:
             await message.channel.send("エラー出たw")     
         else:
             await message.channel.send(f"{message.author.mention}に鯖缶の呟き通知役職をつけたよ(　•̀ω•́)و✧")   
+            
 
 
     if message.content == "i)reward":
