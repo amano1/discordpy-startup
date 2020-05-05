@@ -230,6 +230,8 @@ async def on_message(message):
             text = "" 
 
     if message.channel.id == 707267427624288268:
+        if message.embeds:
+            return
         await message.delete()
         if message.author == amano:
             role = message.guild.get_role(707270363167326260)
