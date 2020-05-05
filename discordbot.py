@@ -240,11 +240,12 @@ async def on_message(message):
                 description = f"{message.content}\n{role.mention}",
                 color = discord.Color.blue())
             embed.set_author(name = amano,icon_url = amano.avatar_url)
-        embed = discord.Embed(
+        else:
+            embed = discord.Embed(
             title = "",
             description = f"{message.content}\n{amano.mention}",
             color = discord.Color.green())
-        embed.set_author(name = message.author,icon_url = message.author.avatar_url)
+            embed.set_author(name = message.author,icon_url = message.author.avatar_url)
         embed.timestamp = datetime.now(JST)
         await message.channel.send(embed = embed)
 
