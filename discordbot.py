@@ -217,7 +217,7 @@ async def on_message(message):
         size = 10
         for start in range(0, len(guild.members), size):
             ms = guild.members[start:start+size]
-            mnum_s = guild.members.inbex(ms[0]) + 1
+            mnum_s = guild.members.index(ms[0]) + 1
             mnum_e = guild.members.index(ms[-1]) + 1
             for m in ms:
                 text += f"\n{m}"
