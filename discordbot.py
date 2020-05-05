@@ -39,7 +39,6 @@ mob_num = 0
 @client.event
 async def on_ready():
     await client.change_presence(activity=discord.Game(name="起動中( ˘ω˘ ) ｽﾔｧ…"))
-    #メンバーとpointのリスト作成
     guild = client.get_guild(674983696977362965)
     members = list(guild.members)
     user_dic = {}
@@ -213,18 +212,18 @@ async def on_message(message):
         num = 0
         # 最大で10人ずつ取り出したい
         size = 10
-        for start in range(0, len(client.user), size):
-            ms = client.user[start:start+size]
-            mnum_s = client.user.inbex(ms[0]) + 1
-            mnum_e = client.user.index(ms[-1]) + 1
+        for start in range(0, len(guild.members), size):
+            ms = guild.members[start:start+size]
+            mnum_s = guild.members.inbex(ms[0]) + 1
+            mnum_e = guild.members.index(ms[-1]) + 1
             for m in ms:
                 text += f"\n{m}"
             embed = discord.Embed(
-                title = f"AMSメンバーリスト({mnum_s}~{mnum_e}/len{client.user}人)",
+                title = f"AMSメンバーリスト({mnum_s}~{mnum_e}/len{guild.members}人)",
                 description = text)
             await message.channel.send(embed = embed)
             
-            
+           
                 
     if message.content == "i)reward":
         if r_flag == False:
