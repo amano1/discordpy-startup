@@ -212,6 +212,7 @@ async def on_message(message):
             
     global r_flag
     if message.content == "i)mlist":
+        
         num = 0
         # 最大で10人ずつ取り出したい
         size = 10
