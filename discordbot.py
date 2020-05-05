@@ -221,13 +221,13 @@ async def on_message(message):
             mnum_s = guild.members.index(ms[0]) + 1
             mnum_e = guild.members.index(ms[-1]) + 1
             for m in ms:
-                text += f"\n+ {m}"
+                text += f"\n{m}"
             embed = discord.Embed(
                 title = f"AMSメンバーリスト",
-                description = f"```diff{text}```")
+                description = f"```py{text}```")
             embed.set_footer(text = f"{mnum_s}~{mnum_e}/{len(guild.members)}人")
             await message.channel.send(embed = embed)
-            text = ""
+            text = "" 
             
            
                 
