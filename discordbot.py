@@ -97,7 +97,7 @@ async def loop():
             try:
                 nick = f"［0］{member.name}"
                 if 32 < len(list(nick)):
-                    nick = nick[:32-len(list(nick))] + "…"
+                    nick = nick[:1 + (32-len(list(nick)))] + "…"
                 await member.edit(nick = nick)
             except:
                 print(f"❌┃{member}のニックネームを変更できませんでした")
