@@ -232,7 +232,7 @@ async def on_message(message):
     if message.channel.id == 707267427624288268:
         await message.delete()
         if message.author == amano:
-            role = 
+            role = message.guild.get_role(707270363167326260)
             embed = discord.Embed(
                 title = "",
                 description = f"message.content",
