@@ -223,9 +223,10 @@ async def on_message(message):
             for m in ms:
                 text += f"\n{m}"
             embed = discord.Embed(
-                title = f"AMSメンバーリスト({mnum_s}~{mnum_e}/len{guild.members}人)",
+                title = f"AMSメンバーリスト({mnum_s}~{mnum_e}/{len(guild.members)}人)",
                 description = text)
             await message.channel.send(embed = embed)
+            text = ""
             
            
                 
