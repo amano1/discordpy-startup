@@ -171,12 +171,12 @@ async def on_message(message):
             if result.group(2) == "超激レア":
                 num = int(ch.name.split("超激レア║")[1])
                 await ch.edit(name = f"超激レア║{num + 1}")
-                role = discord.utils.get(guild.roles,id = 701963908461887568)
+                role = message.guild.get_role(706527459067297864)
                 embed = discord.Embed(
                     title = "超激レア出現！",
                     description = (
                         f"{role.mention}\n{message.channel.mention}で**{result.group(3)}**が出現したよ！" +
-                        f"\nLv：{result.group(4)}\nHP：{result.group(4)}\nExp：{int(result.group(4)) * 100}" +
+                        f"\nLv：`{result.group(4)}`\nHP：`{result.group(5)}`\nExp：`{int(result.group(4)) * 100}`" +
                         f"\n[この{result.group(3)}への直通リンク](message.jump_url)"))
                 embed.set_thumbnail(url = message.embeds[0].image.url)
                 ch = client.get_channel(706931443875708958)
@@ -251,7 +251,7 @@ async def on_message(message):
 
 
             
-    if message.content == "i)超激レア通知":
+    if message.content == "i)超激レア通知役職":
         role = message.guild.get_role(706527459067297864)
         m = message.guild.get_member(message.author.id)
         try:
@@ -262,7 +262,7 @@ async def on_message(message):
             await message.channel.send(f"{message.author.mention}に超激レア通知役職をつけたよ(　•̀ω•́)و✧")   
             
             
-    if message.content == "i)tsubuyaki":
+    if message.content == "i)鯖缶の呟き通知役職":
         role = message.guild.get_role(707270363167326260)
         m = message.guild.get_member(message.author.id)
         try:
