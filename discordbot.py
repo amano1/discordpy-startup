@@ -232,16 +232,16 @@ async def on_message(message):
     if message.channel.id == 707267427624288268:
         await message.delete()
         if message.author == amano:
-            role = message.guild.get_role(707270363167326260)
+            role = 
             embed = discord.Embed(
                 title = "",
-                description = f"{message.content}\n{role.mention}",
+                description = f"message.content",
                 color = discord.Color.blue()))
             embed.set_author(name = amano,icon_url = amano.avatar_url)
         embed = discord.Embed(
             title = "",
             description = f"message.content",
-            color = discord.Color.green()))
+            color = discord.Color.green())
         embed.set_author(name = message.author,icon_url = message.author.avatar_url)
         embed.timestump = datetime.now(JST)
         await message.channel.send(embed = embed)
