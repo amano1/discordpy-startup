@@ -177,7 +177,7 @@ async def on_message(message):
                     description = (
                         f"{role.mention}\n{message.channel.mention}で**{result.group(3)}**が出現したよ！" +
                         f"\nLv：`{result.group(4)}`\nHP：`{result.group(5)}`\nExp：`{int(result.group(4)) * 100}`" +
-                        f"\n[この{result.group(3)}への直通リンク](message.jump_url)"))
+                        f"\n[この{result.group(3)}への直通リンク]({message.jump_url})"))
                 embed.set_thumbnail(url = message.embeds[0].image.url)
                 ch = client.get_channel(706931443875708958)
                 await ch.send(embed = embed)
