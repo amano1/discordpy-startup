@@ -211,12 +211,16 @@ async def on_message(message):
     global r_flag
     if message.content == "i)mlist":
         num = 0
-        for ms in itertools.izip_longest(*[iter(client.user)]*10):
-            text = " "
+        # 最大で10人ずつ取り出したい
+        size = 10
+        for start in range(0, len(client.user), size):
+            ms = client.user[start:start+size]
+            mnum_s = client.user.inbex(ms[0]) + 1
+            mnum_e = client.user.index(ms[-1]) + 1
             for m in ms:
                 text += f"\n{m}"
             embed = discord.Embed(
-                title = f"AMSメンバーリスト(len{client.uaer}人)",
+                title = f"AMSメンバーリスト({mnum_s}~{mnum_e}/len{client.user}人)",
                 description = text)
             await message.channel.send(embed = embed)
             
