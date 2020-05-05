@@ -58,7 +58,7 @@ async def on_ready():
 async def on_member_join(member): 
     embed = discord.Embed(
         title = "Amano's Macro Serverへようこそ！！",
-        description = "まずは[ホームページ](https://tsukumoshimo.wixsite.com/amsserver)を確認してね！^w^)9",
+        description = "まずは[ホームページ](https://tsukumoshimo.wixsite.com/amsserver)を確認してね！^ω^)9",
         color = discord.Color.green())
     await member.send(embed = embed)
     ch = client.get_channel(681211296297123956)
@@ -97,7 +97,7 @@ async def loop():
             try:
                 nick = f"［0］{member.name}"
                 if 32 < len(list(nick)):
-                    nick = nick[:32-len(list(nick)))] + "…"
+                    nick = nick[:32-len(list(nick))] + "…"
                 await member.edit(nick = nick)
             except:
                 print(f"❌┃{member}のニックネームを変更できませんでした")
