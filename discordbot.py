@@ -97,7 +97,7 @@ async def loop():
             try:
                 nick = f"［0］{member.name}"
                 if 32 < len(list(nick)):
-                    nick = nick[:(32-len(list(nick))) - 1] + "…"
+                    nick = nick[:(len(list(nick))) - 1] + "…"
                 await member.edit(nick = nick)
             except:
                 print(f"❌┃{member}のニックネームを変更できませんでした")
@@ -223,8 +223,9 @@ async def on_message(message):
             for m in ms:
                 text += f"\n+ {m}"
             embed = discord.Embed(
-                title = f"AMSメンバーリスト({mnum_s}~{mnum_e}/{len(guild.members)}人)",
+                title = f"AMSメンバーリスト",
                 description = f"```diff{text}```")
+            embed.set_footer(text = f"{mnum_s}~{mnum_e}/{len(guild.members)}人")
             await message.channel.send(embed = embed)
             text = ""
             
