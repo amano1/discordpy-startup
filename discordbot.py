@@ -236,7 +236,7 @@ async def on_message(message):
             embed = discord.Embed(
                 title = "",
                 description = f"message.content",
-                color = discord.Color.blue()))
+                color = discord.Color.blue())
             embed.set_author(name = amano,icon_url = amano.avatar_url)
         embed = discord.Embed(
             title = "",
