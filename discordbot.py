@@ -95,7 +95,10 @@ async def loop():
             print(f"{member.name}:didnt match")
             user_dic[member.id]=0
             try:
-                await member.edit(nick = f"［0］{member.name}")
+                nick = f"［0］{member.name}"
+                if 32 < len(list(nick)):
+                    nick = nick(:-(32 - len(list(nick)))) + "…"
+                await member.edit(nick = nick)
             except:
                 print(f"❌┃{member}のニックネームを変更できませんでした")
             else:
