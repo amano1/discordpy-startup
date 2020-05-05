@@ -229,8 +229,25 @@ async def on_message(message):
             await message.channel.send(embed = embed)
             text = "" 
             
-           
-                
+    if message.content == "i)超激レア通知":
+        role = message.guild.get_role(706527459067297864)
+        try:
+            await message.author.add_role(role)
+        except:
+            await message.channel.send("エラー出たw")     
+        else:
+            await message.channel.send(f"{message.author.mention}に超激レア通知役職をつけたよ(　•̀ω•́)و✧")   
+            
+    if message.content == "i)tsubuyaki":
+        role = message.guild.get_role(707270363167326260)
+        try:
+            await message.author.add_role(role)
+        except:
+            await message.channel.send("エラー出たw")     
+        else:
+            await message.channel.send(f"{message.author.mention}に鯖缶の呟き通知役職をつけたよ(　•̀ω•́)و✧")   
+
+
     if message.content == "i)reward":
         if r_flag == False:
             await message.channel.send("CoolDown中")
