@@ -243,7 +243,7 @@ async def on_message(message):
             description = f"message.content",
             color = discord.Color.green())
         embed.set_author(name = message.author,icon_url = message.author.avatar_url)
-        embed.timestump = datetime.now(JST)
+        embed.timestamp = datetime.now(JST)
         await message.channel.send(embed = embed)
 
 
