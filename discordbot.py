@@ -234,8 +234,8 @@ async def on_message(message):
                     embed = discord.Embed(
                         title = "Command Info：i)help",
                         description = (
-                            "`各コマンドのヘルプが確認出来る。ヘルプで見れるコマンドには" +
-                            "```ctt\n[help,reward,メンバー役職,超激レア通知役職,鯖缶の呟き通知役職,reward]```がある"),
+                            "各コマンドのヘルプが確認出来る。ヘルプで見れるコマンドには" +
+                            "```ini\n[help,reward,メンバー役職,超激レア通知役職,鯖缶の呟き通知役職]```がある"),
                         color = discord.Color.green()
                     )
 
