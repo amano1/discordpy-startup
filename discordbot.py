@@ -104,7 +104,7 @@ async def loop():
             else:
                 print(f"⭕┃{member}のニックネームにPoint:0を追加")
     num = len(guild.members)
-    await client.change_presence(activity=discord.Game(name=f"{num}members"))
+    await client.change_presence(activity=discord.Game(name=fi)help║"{num}members in AMS"))
     user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
     ch_1 = client.get_channel(701803530566238290)
     ch_2 = client.get_channel(701803756571983893)
@@ -225,17 +225,17 @@ async def on_message(message):
                     title = "彩由Help一覧ページ\n",
                     description = (
                         "`i)help コマンド`で各コマンドのヘルプが確認可能です。" +
-                        "```ini\n[help,reward,メンバー役職,超激レア通知役職,鯖缶の呟き通知役職]```"
+                        "```ini\n[help,reward,メンバー役職,ヘルパー役職,超激レア通知役職,鯖缶の呟き通知役職]```"
                     ),
                     color = discord.Color.green()
                 )
             else:
                 if HELP_PAGE == "help":
                     embed = discord.Embed(
-                        title = "Command Info：i)help",
+                        title = "Command Info\n`i)help`",
                         description = (
                             "各コマンドのヘルプが確認出来る。ヘルプで見れるコマンドには" +
-                            "```ini\n[help,reward,メンバー役職,超激レア通知役職,鯖缶の呟き通知役職]```がある"),
+                            "```ini\n[help,reward,メンバー役職,ヘルパー役職,超激レア通知役職,鯖缶の呟き通知役職]```がある"),
                         color = discord.Color.green()
                     )
 
@@ -248,7 +248,7 @@ async def on_message(message):
                     else:
                         point = "何かよくわかんない"
                     embed = discord.Embed(
-                        title = "Command Info：i)reward",
+                        title = "Command Info\n`i)reward`",
                         description = (
                             "pointをTatsumakiCreditに換金できる。\n" +
                             "pointは`🌙TAO🌙`カテゴリーのチャンネルで敵を倒すと増える。\n" +
@@ -258,14 +258,14 @@ async def on_message(message):
                     )
                 elif HELP_PAGE == "超激レア通知役職":
                     embed = discord.Embed(
-                        title = "Command Info：i)超激レア通知役職",
+                        title = "Command Info\n`i)超激レア通知役職`",
                         description = "AMSで超激レアキャラが出現したときに通知する",
                         color = discord.Color.green()
                     )
 
                 elif HELP_PAGE == "鯖缶呟き通知役職":
                     embed = discord.Embed(
-                        title = "Command Info：i)鯖缶呟き通知役職",
+                        title = "Command Info\n`i)鯖缶呟き通知役職`",
                         description = (
                             f"鯖缶({amano.mention})の他愛もない呟きの通知をする。\n" +
                             "**※メンション多め(そもそもこの鯖自体メンション多すぎ)**"),
@@ -273,10 +273,20 @@ async def on_message(message):
                     )
                 elif HELP_PAGE == "メンバー役職":
                     embed = discord.Embed(
-                        title = "Command Info：i)メンバー役職",
+                        title = "Command Info\n`i)メンバー役職`",
                         description = (
                             "鯖のMember役職を付与する。\n" +
                             "ぶっちゃけなくても変わりない。"),
+                        color = discord.Color.green()
+                    )
+                elif HELP_PAGE == "ヘルパー役職":
+                    ch = client.get_channel(707053103983231007)
+                    embed = discord.Embed(
+                        title = "Command Info\n`i)ヘルパー役職`",
+                        description = (
+                            "ServerHelper役職を付与する。\n" +
+                            f"{ch.mention}で発言できるようになるよ。\n" +
+                            "※その代わりメンションが大量に(白目)"),
                         color = discord.Color.green()
                     )
                 else:
@@ -365,6 +375,17 @@ async def on_message(message):
                 await message.channel.send(f"```ctt\n{message.author.mention}に[Member役職]をつけたよ(　•̀ω•́)و✧```")  
 
 
+        if message.content == "i)ヘルパー役職":
+            role = message.guild.get_role(707305711813787699)
+            m = message.guild.get_member(message.author.id)
+            try:
+                await m.add_roles(role)
+            except:
+                await message.channel.send("エラー出たw")     
+            else:
+                await message.channel.send(f"```ctt\n{message.author.mention}に[ServerHelper役職]をつけたよ(　•̀ω•́)و✧```")  
+
+                
         if message.content == "i)reward":
             if r_flag == False:
                 await message.channel.send("CoolDown中")
