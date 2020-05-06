@@ -216,6 +216,7 @@ async def on_message(message):
         if message.content.startswith("i)help"):
             embed = None
             member = message.guild.get_member(message.author.id)
+            HELP_PAGE = None
             try:
                 HELP_PAGE = message.content.split("i)help ")[1]
             except:
@@ -233,8 +234,7 @@ async def on_message(message):
                         title = "Command Info：i)help",
                         description = (
                             "`各コマンドのヘルプが確認出来る。ヘルプで見れるコマンドには" +
-                            "```ctt\n[help,reward,メンバー役職,超激レア通知役職,鯖缶の呟き通知役職,reward]```がある"
-                        ),
+                            "```ctt\n[help,reward,メンバー役職,超激レア通知役職,鯖缶の呟き通知役職,reward]```がある"),
                         color = discord.Color.green()
                     )
 
@@ -252,8 +252,7 @@ async def on_message(message):
                             "pointをTatsumakiCreditに換金できる。\n" +
                             "pointは`🌙TAO🌙`カテゴリーのチャンネルで敵を倒すと増える。\n" +
                             "名前の横にある[]の中の数字が現在の所持pointである。\n" +
-                            f"ちなみに貴方のpointは{point}"
-                        ),
+                            f"ちなみに貴方のpointは{point}"),
                         color = discord.Color.green()
                     )
                 if HELP_PAGE == "超激レア通知役職":
@@ -268,8 +267,7 @@ async def on_message(message):
                         title = "Command Info：i)鯖缶呟き通知役職",
                         description = (
                             f"鯖缶({amano.mention})の他愛もない呟きの通知をする。\n" +
-                            "**※メンション多め(そもそもこの鯖自体メンション多すぎ)**"
-                    ),
+                            "**※メンション多め(そもそもこの鯖自体メンション多すぎ)**"),
                         color = discord.Color.green()
                     )
                 if HELP_PAGE == "メンバー役職":
@@ -277,10 +275,14 @@ async def on_message(message):
                         title = "Command Info：i)メンバー役職",
                         description = (
                             "鯖のMember役職を付与する。\n" +
-                            "ぶっちゃけなくても変わりない。"
-                        ),
+                            "ぶっちゃけなくても変わりない。"),
                         color = discord.Color.green()
                     )
+                else:
+                    embed = discord.Embed(
+                        title = f"Error",
+                        description = f"`{HELP_PAGE}`ってコマンドはなかったかなぁ…？",
+                        color = discord.Color.red())
                 embed.timestamp = datetime.now(JST)
                 await message.channel.send(embed = embed)
 
