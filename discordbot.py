@@ -442,7 +442,7 @@ async def on_message(message):
             description = ERROR,
             color = discord.Color.red())
         embed.add_field(
-            name = "エラーが出たメッセージ"
+            name = "エラーが出たメッセージ",
             value = message.content)
         embed.timestamp = datetime.now(JST)
         await message.channel.send(embed = embed)
