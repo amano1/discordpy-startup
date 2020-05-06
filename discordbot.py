@@ -277,9 +277,9 @@ async def on_message(message):
                         title = "Command Info：i)メンバー役職",
                         description = (
                             "鯖のMember役職を付与する。\n" +
-                            "ぶっちゃけなくても変わりない。",
+                            "ぶっちゃけなくても変わりない。"
+                        ),
                         color = discord.Color.green()
-                        )
                     )
                 embed.timestamp = datetime.now(JST)
                 await message.channel.send(embed = embed)
