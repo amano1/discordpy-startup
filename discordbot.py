@@ -308,10 +308,15 @@ async def on_message(message):
                 mnum_s = guild.members.index(ms[0]) + 1
                 mnum_e = guild.members.index(ms[-1]) + 1
                 for m in ms:
+                    type = ""
                     if m.status == discord.Status.online:
-                        text += f"\n+ {m}"
-                    elif m.status != discord.Status.online:
-                        text += f"\n- {m}"
+                        text += f"\n+ 🟢{m}"
+                    elif m.status == discord.Status.dnd:
+                        text += f"\n- 🔴{m}"
+                    elif m.status == discord.Status.idle:
+                        text += f"\n- 🌙{m}"
+                    elif m.status == discord.Status.offline:
+                        text += f"\n- ⚪{m}"
                 embed = discord.Embed(
                     title = f"AMSメンバーリスト",
                     description = f"```diff{text}```")
