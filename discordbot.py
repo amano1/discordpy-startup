@@ -145,207 +145,229 @@ async def loop():
     
 @client.event
 async def on_message(message):
-    amano = client.get_user(690901325298401291)
-    global user_dic
-    guild = client.get_guild(674983696977362965)
-    if not message.channel.guild:
-        return
-    
+    try:
+        amano = client.get_user(690901325298401291)
+        global user_dic
+        guild = client.get_guild(674983696977362965)
+        if not message.channel.guild:
+            return
 
-    if message.embeds and message.channel.category.id == 674983811850960916:
-        em_title = "None"
-        em_desc = "None"
-        if message.embeds[0].title:
-            em_title = message.embeds[0].title
-        if message.embeds[0].description:
-            em_desc = message.embeds[0].description
-        pattern_a = r"^属性:\[(.+)] \| ランク:【(.+)】\n(.+)が待ち構えている...！\nLv\.(\d+)  HP:(\d+)"
-        pattern_b = r"(.{1,})は(\d{1,})経験値を獲得"
-        result_a = re.search(pattern_a,em_title)
-        result_b = re.search(pattern_b,em_desc)
-        if result_a:
-            global mob_num
-            mob_num += 1
-            result= result_a
-            ch = client.get_channel(703821795387768832)
-            if result.group(2) == "超激レア":
-                num = int(ch.name.split("超激レア║")[1])
-                await ch.edit(name = f"超激レア║{num + 1}")
-                role = message.guild.get_role(706527459067297864)
-                embed = discord.Embed(
-                    title = "超激レア出現！",
-                    description = (
-                        f"{role.mention}\n{message.channel.mention}で**{result.group(3)}**が出現したよ！" +
-                        f"\nLv：`{result.group(4)}`\nHP：`{result.group(5)}`\nExp：`{int(result.group(4)) * 100}`" +
-                        f"\n[この{result.group(3)}への直通リンク]({message.jump_url})"))
-                embed.set_thumbnail(url = message.embeds[0].image.url)
-                ch = client.get_channel(706931443875708958)
-                await ch.send(embed = embed)
-     
-        if result_b:
-            result = result_b
-            mention = result.group(1)
-            exp = result.group(2)
-            user = discord.utils.get(client.users,mention = mention)
-            if not user or user == amano:
-                return
-            pattern = r'^(\［(\d{1,})］)'
-            member = message.guild.get_member(user.id)
-            result_2 = re.search(pattern,member.display_name)
-            if not result_2:
-                user_dic[user.id] = 1 
+
+        if message.embeds and message.channel.category.id == 674983811850960916:
+            em_title = "None"
+            em_desc = "None"
+            if message.embeds[0].title:
+                em_title = message.embeds[0].title
+            if message.embeds[0].description:
+                em_desc = message.embeds[0].description
+            pattern_a = r"^属性:\[(.+)] \| ランク:【(.+)】\n(.+)が待ち構えている...！\nLv\.(\d+)  HP:(\d+)"
+            pattern_b = r"(.{1,})は(\d{1,})経験値を獲得"
+            result_a = re.search(pattern_a,em_title)
+            result_b = re.search(pattern_b,em_desc)
+            if result_a:
+                global mob_num
+                mob_num += 1
+                result= result_a
+                ch = client.get_channel(703821795387768832)
+                if result.group(2) == "超激レア":
+                    num = int(ch.name.split("超激レア║")[1])
+                    await ch.edit(name = f"超激レア║{num + 1}")
+                    role = message.guild.get_role(706527459067297864)
+                    embed = discord.Embed(
+                        title = "超激レア出現！",
+                        description = (
+                            f"{role.mention}\n{message.channel.mention}で**{result.group(3)}**が出現したよ！" +
+                            f"\nLv：`{result.group(4)}`\nHP：`{result.group(5)}`\nExp：`{int(result.group(4)) * 100}`" +
+                            f"\n[この{result.group(3)}への直通リンク]({message.jump_url})"))
+                    embed.set_thumbnail(url = message.embeds[0].image.url)
+                    embed.timestamp = datetime.now(JST)
+                    ch = client.get_channel(706931443875708958)
+                    await ch.send(embed = embed)
+
+            if result_b:
+                result = result_b
+                mention = result.group(1)
+                exp = result.group(2)
+                user = discord.utils.get(client.users,mention = mention)
+                if not user or user == amano:
+                    return
+                pattern = r'^(\［(\d{1,})］)'
+                member = message.guild.get_member(user.id)
+                result_2 = re.search(pattern,member.display_name)
+                if not result_2:
+                    user_dic[user.id] = 1 
+                    try:
+                        await member.edit(nick = f"［0］{member.name}")
+                    except:
+                        pass
+                    else:
+                        pass
+                    return
+                if user.id in user_dic:
+                    user_dic[user.id] = int(user_dic[user.id]) + 1
                 try:
-                    await member.edit(nick = f"［0］{member.name}")
+                    await member.edit(nick = f"［{user_dic[user.id]}］{member.name}")
                 except:
                     pass
                 else:
                     pass
+
+        global r_flag
+        if message.content == "i)mlist":
+            text = ""
+            num = 0
+            # 最大で10人ずつ取り出したい
+            size = 10
+            for start in range(0, len(guild.members), size):
+                ms = guild.members[start:start+size]
+                mnum_s = guild.members.index(ms[0]) + 1
+                mnum_e = guild.members.index(ms[-1]) + 1
+                for m in ms:
+                    text += f"\n{m}"
+                embed = discord.Embed(
+                    title = f"AMSメンバーリスト",
+                    description = f"```py{text}```")
+                embed.set_footer(text = f"{mnum_s}~{mnum_e}/{len(guild.members)}人")
+                await message.channel.send(embed = embed)
+                text = "" 
+
+        if message.channel.id == 707267427624288268:
+            if message.embeds:
                 return
-            if user.id in user_dic:
-                user_dic[user.id] = int(user_dic[user.id]) + 1
-            try:
-                await member.edit(nick = f"［{user_dic[user.id]}］{member.name}")
-            except:
-                pass
+            await message.delete()
+            if message.author == amano:
+                role = message.guild.get_role(707270363167326260)
+                embed = discord.Embed(
+                    title = "",
+                    description = f"{message.content}\n{role.mention}",
+                    color = discord.Color.blue())
+                embed.set_author(name = amano,icon_url = amano.avatar_url)
             else:
-                pass
-            
-    global r_flag
-    if message.content == "i)mlist":
-        text = ""
-        num = 0
-        # 最大で10人ずつ取り出したい
-        size = 10
-        for start in range(0, len(guild.members), size):
-            ms = guild.members[start:start+size]
-            mnum_s = guild.members.index(ms[0]) + 1
-            mnum_e = guild.members.index(ms[-1]) + 1
-            for m in ms:
-                text += f"\n{m}"
-            embed = discord.Embed(
-                title = f"AMSメンバーリスト",
-                description = f"```py{text}```")
-            embed.set_footer(text = f"{mnum_s}~{mnum_e}/{len(guild.members)}人")
-            await message.channel.send(embed = embed)
-            text = "" 
-
-    if message.channel.id == 707267427624288268:
-        if message.embeds:
-            return
-        await message.delete()
-        if message.author == amano:
-            role = message.guild.get_role(707270363167326260)
-            embed = discord.Embed(
+                embed = discord.Embed(
                 title = "",
-                description = f"{message.content}\n{role.mention}",
-                color = discord.Color.blue())
-            embed.set_author(name = amano,icon_url = amano.avatar_url)
-        else:
-            embed = discord.Embed(
-            title = "",
-            description = f"{message.content}\n{amano.mention}",
-            color = discord.Color.green())
-            embed.set_author(name = message.author,icon_url = message.author.avatar_url)
-        embed.timestamp = datetime.now(JST)
-        await message.channel.send(embed = embed)
-
-
-            
-    if message.content == "i)超激レア通知役職":
-        role = message.guild.get_role(706527459067297864)
-        m = message.guild.get_member(message.author.id)
-        try:
-            await m.add_roles(role)
-        except:
-            await message.channel.send("エラー出たw")     
-        else:
-            await message.channel.send(f"{message.author.mention}に超激レア通知役職をつけたよ(　•̀ω•́)و✧")   
-            
-            
-    if message.content == "i)鯖缶の呟き通知役職":
-        role = message.guild.get_role(707270363167326260)
-        m = message.guild.get_member(message.author.id)
-        try:
-            await m.add_roles(role)
-        except:
-            await message.channel.send("エラー出たw")     
-        else:
-            await message.channel.send(f"{message.author.mention}に鯖缶の呟き通知役職をつけたよ(　•̀ω•́)و✧")   
-            
-
-
-    if message.content == "i)reward":
-        if r_flag == False:
-            await message.channel.send("CoolDown中")
-            return
-        r_flag = False
-        ch_id = 701721786592657461
-        ch = client.get_channel(ch_id)
-        user = message.author
-        point = user_dic[user.id]
-        if user_dic[user.id] == 0:
-            await message.channel.send("Pointが無いんだけど?")
-            r_flag = True
-            return
-        await ch.send(f"reward [{user.id}] [{user_dic[user.id]}]")
-        def check(msg):
-            if msg.author.id != 172002275412279296:
-                return 0
-            if msg.channel.id != ch_id:
-                return 0
-            if not "deducted" in msg.content:
-                return 0
-            if not amano.name in msg.content:
-                return 0
-            return 1
-        try:
-            resp = await client.wait_for("message",timeout = 5,check = check)
-        except:
-            embed = discord.Embed(
-                title = f"あちゃーごめん{user.name}。\nなんか報酬配布がうまくいかなかったわ",
-                color = discord.Color.red())
+                description = f"{message.content}\n{amano.mention}",
+                color = discord.Color.green())
+                embed.set_author(name = message.author,icon_url = message.author.avatar_url)
+            embed.timestamp = datetime.now(JST)
             await message.channel.send(embed = embed)
-            r_flag = True
-        else:        
-            pattern = r"(\d{1,}) has been deducted"
-            result = re.search(pattern,resp.content)
-            if not result:
+
+
+
+        if message.content == "i)超激レア通知役職":
+            role = message.guild.get_role(706527459067297864)
+            m = message.guild.get_member(message.author.id)
+            try:
+                await m.add_roles(role)
+            except:
+                await message.channel.send("エラー出たw")     
+            else:
+                await message.channel.send(f"```ctt\n{message.author.mention}に[超激レア通知役職]をつけたよ(　•̀ω•́)و✧```")   
+
+
+        if message.content == "i)鯖缶の呟き通知役職":
+            role = message.guild.get_role(707270363167326260)
+            m = message.guild.get_member(message.author.id)
+            try:
+                await m.add_roles(role)
+            except:
+                await message.channel.send("エラー出たw")     
+            else:
+                await message.channel.send(f"```ctt\n{message.author.mention}に[鯖缶の呟き通知役職]をつけたよ(　•̀ω•́)و✧")   
+
+
+        if message.content == "i)メンバー役職":
+            role = message.guild.get_role(701963908461887568)
+            m = message.guild.get_member(message.author.id)
+            try:
+                await m.add_roles(role)
+            except:
+                await message.channel.send("エラー出たw")     
+            else:
+                await message.channel.send(f"```ctt\n{message.author.mention}に[Member役職]をつけたよ(　•̀ω•́)و✧```")  
+
+
+        if message.content == "i)reward":
+            if r_flag == False:
+                await message.channel.send("CoolDown中")
+                return
+            r_flag = False
+            ch_id = 701721786592657461
+            ch = client.get_channel(ch_id)
+            user = message.author
+            point = user_dic[user.id]
+            if user_dic[user.id] == 0:
+                await message.channel.send("Pointが無いんだけど?")
+                r_flag = True
+                return
+            await ch.send(f"reward [{user.id}] [{user_dic[user.id]}]")
+            def check(msg):
+                if msg.author.id != 172002275412279296:
+                    return 0
+                if msg.channel.id != ch_id:
+                    return 0
+                if not "deducted" in msg.content:
+                    return 0
+                if not amano.name in msg.content:
+                    return 0
+                return 1
+            try:
+                resp = await client.wait_for("message",timeout = 5,check = check)
+            except:
                 embed = discord.Embed(
                     title = f"あちゃーごめん{user.name}。\nなんか報酬配布がうまくいかなかったわ",
                     color = discord.Color.red())
                 await message.channel.send(embed = embed)
                 r_flag = True
-                return
-            member = discord.utils.get(message.guild.members,id = user.id)
-            await member.edit(nick = f"［0］{member.name}")
-            user_dic[user.id] = 0
-            print(user_dic[user.id])
+            else:        
+                pattern = r"(\d{1,}) has been deducted"
+                result = re.search(pattern,resp.content)
+                if not result:
+                    embed = discord.Embed(
+                        title = f"あちゃーごめん{user.name}。\nなんか報酬配布がうまくいかなかったわ",
+                        color = discord.Color.red())
+                    await message.channel.send(embed = embed)
+                    r_flag = True
+                    return
+                member = discord.utils.get(message.guild.members,id = user.id)
+                await member.edit(nick = f"［0］{member.name}")
+                user_dic[user.id] = 0
+                print(user_dic[user.id])
+                embed = discord.Embed(
+                    title = f"{user.name}に**{point}TCredit**を配布したよ！。\nおめでとう！(Pointがリセットされました)",
+                    color = discord.Color.green())
+                await message.channel.send(embed = embed)
+                await asyncio.sleep(10)
+                r_flag = True
+
+        global deleuser
+        global delech
+        if deleuser and delech and message.channel==delech and message.author==deleuser:
+            await message.delete()
             embed = discord.Embed(
-                title = f"{user.name}に**{point}TCredit**を配布したよ！。\nおめでとう！(Pointがリセットされました)",
-                color = discord.Color.green())
+                title = f"{deleuser}の発言",
+                description = f"||{message.content}||")
             await message.channel.send(embed = embed)
-            await asyncio.sleep(10)
-            r_flag = True
-    
-    global deleuser
-    global delech
-    if deleuser and delech and message.channel==delech and message.author==deleuser:
-        await message.delete()
+        if message.content.startswith('i)dele'):
+            deleuser_id=int(message.content.split(' ')[1])
+            deleuser=client.get_user(deleuser_id)
+            delech_id=int(message.content.split(' ')[2])
+            delech=client.get_channel(delech_id)
+            await message.channel.send(embed = discord.Embed(title = f"{deleuser}を{delech.name}で全力ミュートします"))
+
+        if message.content=='i)deleNone':
+            delech=None
+            deleuser=None
+
+   except Exception as error:
+        ERROR_TYPE = str(type(error))
+        ERROR = str(e)
         embed = discord.Embed(
-            title = f"{deleuser}の発言",
-            description = f"||{message.content}||")
-        await message.channel.send(embed = embed)
-    if message.content.startswith('i)dele'):
-        deleuser_id=int(message.content.split(' ')[1])
-        deleuser=client.get_user(deleuser_id)
-        delech_id=int(message.content.split(' ')[2])
-        delech=client.get_channel(delech_id)
-        await message.channel.send(embed = discord.Embed(title = f"{deleuser}を{delech.name}で全力ミュートします"))
-
-    if message.content=='i)deleNone':
-        delech=None
-        deleuser=None
-
-
+            title = ERROR_TYPE,
+            description = ERROR,
+            color = discord.Color.red())
+        embed.add_field(
+            name = "エラーが出たメッセージ"
+            value = message.content)
+        embed.timestamp = datetime.now(JST)
     
 client.run(TOKEN)
