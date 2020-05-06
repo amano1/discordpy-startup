@@ -225,7 +225,7 @@ async def on_message(message):
                     title = "彩由Help一覧ページ\n",
                     description = (
                         "`i)help コマンド`で各コマンドのヘルプが確認可能です。" +
-                        "```ini\n[help,reward,メンバー役職,超激レア通知役職,鯖缶の呟き通知役職,reward]```"
+                        "```ini\n[help,reward,メンバー役職,超激レア通知役職,鯖缶の呟き通知役職]```"
                     ),
                     color = discord.Color.green()
                 )
