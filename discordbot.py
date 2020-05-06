@@ -369,5 +369,5 @@ async def on_message(message):
             name = "エラーが出たメッセージ"
             value = message.content)
         embed.timestamp = datetime.now(JST)
-    
+        await message.channel.send(embed = embed)
 client.run(TOKEN)
