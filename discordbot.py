@@ -268,9 +268,9 @@ async def on_message(message):
                         title = "Command Info：i)鯖缶呟き通知役職",
                         description = (
                             f"鯖缶({amano.mention})の他愛もない呟きの通知をする。\n" +
-                            "**※メンション多め(そもそもこの鯖自体メンション多すぎ)**",)
+                            "**※メンション多め(そもそもこの鯖自体メンション多すぎ)**"
+                    ),
                         color = discord.Color.green()
-                        )
                     )
                 if HELP_PAGE == "メンバー役職":
                     embed = discord.Embed(
