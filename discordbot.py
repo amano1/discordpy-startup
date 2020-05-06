@@ -316,7 +316,7 @@ async def on_message(message):
                     elif m.status == discord.Status.idle:
                         text += f"\n- 🌙{m}"
                     elif m.status == discord.Status.offline:
-                        text += f"\n- ⚪{m}"
+                        text += f"\n○ ⚪{m}"
                 embed = discord.Embed(
                     title = f"AMSメンバーリスト",
                     description = f"```diff{text}```")
