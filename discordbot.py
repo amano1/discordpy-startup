@@ -183,7 +183,8 @@ async def on_message(message):
                     embed.timestamp = datetime.now(JST)
                     ch = client.get_channel(706931443875708958)
                     await ch.send(embed = embed)
-
+                    num = int(ch.name.split("║")[1])
+                    await ch.edit(name =  f"超激レア出現║{num + 1}")
             if result_b:
                 result = result_b
                 mention = result.group(1)
