@@ -284,8 +284,8 @@ async def on_message(message):
                         title = f"Error",
                         description = f"`{HELP_PAGE}`ってコマンドはなかったかなぁ…？",
                         color = discord.Color.red())
-                embed.timestamp = datetime.now(JST)
-                await message.channel.send(embed = embed)
+            embed.timestamp = datetime.now(JST)
+            await message.channel.send(embed = embed)
 
                 
                 
