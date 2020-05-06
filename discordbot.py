@@ -104,7 +104,7 @@ async def loop():
             else:
                 print(f"⭕┃{member}のニックネームにPoint:0を追加")
     num = len(guild.members)
-    await client.change_presence(activity=discord.Game(name=fi)help║"{num}members in AMS"))
+    await client.change_presence(activity=discord.Game(name=f"i)help║{num}members in AMS"))
     user_list = sorted(user_dic.items(), key=lambda x:x[1], reverse=True)
     ch_1 = client.get_channel(701803530566238290)
     ch_2 = client.get_channel(701803756571983893)
