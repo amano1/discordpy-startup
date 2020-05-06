@@ -436,7 +436,7 @@ async def on_message(message):
 
     except Exception as error:
         ERROR_TYPE = str(type(error))
-        ERROR = str(e)
+        ERROR = str(error)
         embed = discord.Embed(
             title = ERROR_TYPE,
             description = ERROR,
@@ -446,4 +446,6 @@ async def on_message(message):
             value = message.content)
         embed.timestamp = datetime.now(JST)
         await message.channel.send(embed = embed)
+    else:
+        pass
 client.run(TOKEN)
