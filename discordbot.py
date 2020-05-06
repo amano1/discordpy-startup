@@ -239,7 +239,7 @@ async def on_message(message):
                         color = discord.Color.green()
                     )
 
-                if HELP_PAGE == "reward":        
+                elif HELP_PAGE == "reward":        
                     pattern = r'^(\［(\d{1,})］)'
                     result = re.search(pattern,member.display_name)
                     point = None
@@ -256,14 +256,14 @@ async def on_message(message):
                             f"ちなみに貴方のpointは{point}"),
                         color = discord.Color.green()
                     )
-                if HELP_PAGE == "超激レア通知役職":
+                elif HELP_PAGE == "超激レア通知役職":
                     embed = discord.Embed(
                         title = "Command Info：i)超激レア通知役職",
                         description = "AMSで超激レアキャラが出現したときに通知する",
                         color = discord.Color.green()
                     )
 
-                if HELP_PAGE == "鯖缶呟き通知役職":
+                elif HELP_PAGE == "鯖缶呟き通知役職":
                     embed = discord.Embed(
                         title = "Command Info：i)鯖缶呟き通知役職",
                         description = (
@@ -271,7 +271,7 @@ async def on_message(message):
                             "**※メンション多め(そもそもこの鯖自体メンション多すぎ)**"),
                         color = discord.Color.green()
                     )
-                if HELP_PAGE == "メンバー役職":
+                elif HELP_PAGE == "メンバー役職":
                     embed = discord.Embed(
                         title = "Command Info：i)メンバー役職",
                         description = (
