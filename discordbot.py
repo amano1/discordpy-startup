@@ -259,7 +259,7 @@ async def on_message(message):
                 elif HELP_PAGE == "超激レア通知役職":
                     embed = discord.Embed(
                         title = "Command Info\n`i)超激レア通知役職`",
-                        description = "AMSで超激レアキャラが出現したときに通知する",
+                        description = "AMSで超激レアキャラが出現したときに通知する役職を付与",
                         color = discord.Color.green()
                     )
 
@@ -267,7 +267,7 @@ async def on_message(message):
                     embed = discord.Embed(
                         title = "Command Info\n`i)鯖缶呟き通知役職`",
                         description = (
-                            f"鯖缶({amano.mention})の他愛もない呟きの通知をする。\n" +
+                            f"鯖缶({amano.mention})の他愛もない呟きの通知をする役職を付与。\n" +
                             "**※メンション多め(そもそもこの鯖自体メンション多すぎ)**"),
                         color = discord.Color.green()
                     )
@@ -275,7 +275,7 @@ async def on_message(message):
                     embed = discord.Embed(
                         title = "Command Info\n`i)メンバー役職`",
                         description = (
-                            "鯖のMember役職を付与する。\n" +
+                            "鯖のMember役職を付与。\n" +
                             "ぶっちゃけなくても変わりない。"),
                         color = discord.Color.green()
                     )
@@ -284,7 +284,7 @@ async def on_message(message):
                     embed = discord.Embed(
                         title = "Command Info\n`i)ヘルパー役職`",
                         description = (
-                            "ServerHelper役職を付与する。\n" +
+                            "ServerHelper役職を付与。\n" +
                             f"{ch.mention}で発言できるようになるよ。\n" +
                             "※その代わりメンションが大量に(白目)"),
                         color = discord.Color.green()
@@ -350,7 +350,7 @@ async def on_message(message):
             except:
                 await message.channel.send("エラー出たw")     
             else:
-                await message.channel.send(f"```ctt\n{message.author.mention}に[超激レア通知役職]をつけたよ(　•̀ω•́)و✧```")   
+                await message.channel.send(f"{message.author.mention}に[超激レア通知役職]をつけたよ(　•̀ω•́)و✧")   
 
 
         if message.content == "i)鯖缶の呟き通知役職":
@@ -361,7 +361,7 @@ async def on_message(message):
             except:
                 await message.channel.send("エラー出たw")     
             else:
-                await message.channel.send(f"```ctt\n{message.author.mention}に[鯖缶の呟き通知役職]をつけたよ(　•̀ω•́)و✧")   
+                await message.channel.send(f"\n{message.author.mention}に[鯖缶の呟き通知役職]をつけたよ(　•̀ω•́)و✧")   
 
 
         if message.content == "i)メンバー役職":
@@ -372,7 +372,7 @@ async def on_message(message):
             except:
                 await message.channel.send("エラー出たw")     
             else:
-                await message.channel.send(f"```ctt\n{message.author.mention}に[Member役職]をつけたよ(　•̀ω•́)و✧```")  
+                await message.channel.send(f"{message.author.mention}に[Member役職]をつけたよ(　•̀ω•́)و✧")  
 
 
         if message.content == "i)ヘルパー役職":
@@ -383,7 +383,7 @@ async def on_message(message):
             except:
                 await message.channel.send("エラー出たw")     
             else:
-                await message.channel.send(f"```ctt\n{message.author.mention}に[ServerHelper役職]をつけたよ(　•̀ω•́)و✧```")  
+                await message.channel.send(f"\n{message.author.mention}に[ServerHelper役職]をつけたよ(　•̀ω•́)و✧")  
 
                 
         if message.content == "i)reward":
