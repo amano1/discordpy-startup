@@ -296,10 +296,6 @@ async def on_message(message):
                         color = discord.Color.red())
             embed.timestamp = datetime.now(JST)
             await message.channel.send(embed = embed)
-
-                
-                
-                
                 
         global r_flag
         if message.content == "i)mlist":
@@ -312,7 +308,10 @@ async def on_message(message):
                 mnum_s = guild.members.index(ms[0]) + 1
                 mnum_e = guild.members.index(ms[-1]) + 1
                 for m in ms:
-                    text += f"\n{m}"
+                    if m.status == discord.Status.online:
+                        text += f"\n+ {m}"
+                    elif m.status != discord.Status.online:
+                        text += f"\n- {m}"
                 embed = discord.Embed(
                     title = f"AMSメンバーリスト",
                     description = f"```py{text}```")
@@ -433,7 +432,7 @@ async def on_message(message):
                 user_dic[user.id] = 0
                 print(user_dic[user.id])
                 embed = discord.Embed(
-                    title = f"{user.name}に**{point}TCredit**を配布したよ！。\nおめでとう！(Pointがリセットされました)",
+                    title = f"{user.name}に**{point}**TCreditを配布したよ！。\nおめでとう！(Pointがリセットされました)",
                     color = discord.Color.green())
                 await message.channel.send(embed = embed)
                 await asyncio.sleep(10)
