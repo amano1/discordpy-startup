@@ -314,7 +314,7 @@ async def on_message(message):
                         text += f"\n- {m}"
                 embed = discord.Embed(
                     title = f"AMSメンバーリスト",
-                    description = f"```py{text}```")
+                    description = f"```diff{text}```")
                 embed.set_footer(text = f"{mnum_s}~{mnum_e}/{len(guild.members)}人")
                 await message.channel.send(embed = embed)
                 text = "" 
