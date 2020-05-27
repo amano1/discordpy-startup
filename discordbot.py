@@ -55,14 +55,16 @@ async def on_ready():
     
     await ready_ch.send(embed = embed)
     num = len(guild.members)
-    await client.change_presence(activity=discord.Game(name=f"{num}members in this server"))
+    await client.change_presence(activity=discord.Game(name=f"Let’s hook up"))
     loop.start()
     
 @client.event
 async def on_member_join(member): 
     embed = discord.Embed(
-        title = "Let's fuck!!",'''
-        description = "まずは[ホームページ](https://tsukumoshimo.wixsite.com/amsserver)を確認してね！^ω^)9",'''
+        title = "Let's fuck!!",
+        '''
+        description = "まずは[ホームページ](https://tsukumoshimo.wixsite.com/amsserver)を確認してね！^ω^)9",
+        '''
         color = discord.Color.green())
     await member.send(embed = embed)
     ch = client.get_channel(715106478423539774)
