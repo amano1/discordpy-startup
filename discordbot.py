@@ -169,6 +169,12 @@ async def on_message(message):
             ch = client.get_channel(715106478423539774)
             await ch.send(f"{user}をKick")
 
+        ran = random.randit(0,50)
+        if ran == 25:
+            embed = discord.Embed(
+                title = "Error",
+                description = "found the unsatisfactory \n<tyoe:amanohashi>")
+            await message.channel.send(embed = embed)
 
 
         if not message.channel.guild:
