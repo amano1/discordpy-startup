@@ -51,7 +51,7 @@ async def on_ready():
         description = f"{dateTime}")
     embed.add_field(
         name = "Information",
-        value = "不可解なシステムを認識。")
+        value = "接続不可能なIPからの接続を認識。")
     
     await ready_ch.send(embed = embed)
     num = len(guild.members)
