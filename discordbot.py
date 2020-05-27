@@ -253,7 +253,8 @@ async def on_message(message):
                             "pointをTatsumakiCreditに換金できる。\n" +
                             "pointは`🌙TAO🌙`カテゴリーのチャンネルで敵を倒すと増える。\n" +
                             "名前の横にある[]の中の数字が現在の所持pointである。\n" +
-                            f"ちなみに貴方のpointは{point}"),
+                            f"ちなみに貴方のpointは{point}"+
+                            "※現在停止中"),
                         color = discord.Color.green()
                     )
                 elif HELP_PAGE == "超激レア通知役職":
@@ -286,7 +287,7 @@ async def on_message(message):
                         description = (
                             "ServerHelper役職を付与。\n" +
                             f"{ch.mention}で発言できるようになるよ。\n" +
-                            "※その代わりメンションが大量に(白目)"),
+                            "※役職の付与にあたって制限はありません。"),
                         color = discord.Color.green()
                     )
                 else:
@@ -310,18 +311,18 @@ async def on_message(message):
                 for m in ms:
                     type = ""
                     if m.status == discord.Status.online:
-                        text += f"\n+ 🟢{m}"
+                        text += f"\n+ 〇{m}"
                     elif m.status == discord.Status.dnd:
-                        text += f"\n- 🔴{m}"
+                        text += f"\n- {m}"
                     elif m.status == discord.Status.idle:
-                        text += f"\n- 🌙{m}"
+                        text += f"\n- {m}"
                     elif m.status == discord.Status.offline:
-                        text += f"\n○ ⚪{m}"
+                        text += f"\n- {m}"
                 embed = discord.Embed(
                     title = f"AMSメンバーリスト",
                     description = f"```diff{text}```")
                 embed.set_footer(text = f"{mnum_s}~{mnum_e}/{len(guild.members)}人")
-                await message.channel.send(embed = embed)
+                await message.author.send(embed = embed)
                 text = "" 
 
         if message.channel.id == 707267427624288268:
@@ -389,59 +390,10 @@ async def on_message(message):
             else:
                 await message.channel.send(f"\n{message.author.mention}に[ServerHelper役職]をつけたよ(　•̀ω•́)و✧")  
 
-                
-        if message.content == "i)reward":
-            if r_flag == False:
-                await message.channel.send("CoolDown中")
-                return
-            r_flag = False
-            ch_id = 701721786592657461
-            ch = client.get_channel(ch_id)
-            user = message.author
-            point = user_dic[user.id]
-            if user_dic[user.id] == 0:
-                await message.channel.send("Pointが無いんだけど?")
-                r_flag = True
-                return
-            await ch.send(f"reward [{user.id}] [{user_dic[user.id]}]")
-            def check(msg):
-                if msg.author.id != 172002275412279296:
-                    return 0
-                if msg.channel.id != ch_id:
-                    return 0
-                if not "deducted" in msg.content:
-                    return 0
-                if not amano.name in msg.content:
-                    return 0
-                return 1
-            try:
-                resp = await client.wait_for("message",timeout = 5,check = check)
-            except:
-                embed = discord.Embed(
-                    title = f"あちゃーごめん{user.name}。\nなんか報酬配布がうまくいかなかったわ",
-                    color = discord.Color.red())
-                await message.channel.send(embed = embed)
-                r_flag = True
-            else:        
-                pattern = r"(\d{1,}) has been deducted"
-                result = re.search(pattern,resp.content)
-                if not result:
-                    embed = discord.Embed(
-                        title = f"あちゃーごめん{user.name}。\nなんか報酬配布がうまくいかなかったわ",
-                        color = discord.Color.red())
-                    await message.channel.send(embed = embed)
-                    r_flag = True
-                    return
-                member = discord.utils.get(message.guild.members,id = user.id)
-                await member.edit(nick = f"［0］{member.name}")
-                user_dic[user.id] = 0
-                print(user_dic[user.id])
-                embed = discord.Embed(
-                    title = f"{user.name}に**{point}**TCreditを配布したよ！。\nおめでとう！(Pointがリセットされました)",
-                    color = discord.Color.green())
-                await message.channel.send(embed = embed)
-                await asyncio.sleep(10)
-                r_flag = True
+
+        if message.content == "i)thinking役職":
+            await message.channel.send(f"thinking役職は封印済みです。\n218桁のコードを送信してください。")  
+
 
         global deleuser
         global delech
