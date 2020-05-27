@@ -80,7 +80,7 @@ async def on_member_remove(member):
 async def loop():
     
     guild = client.get_guild(674983696977362965)
-    await guild.edit(name = "Amano's Macro Server")
+    await guild.edit(name = f"Amano's Macro Server {datetime.now(JST)}")
 
     '''
     global user_dic,user_list,mob_num
