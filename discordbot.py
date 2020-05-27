@@ -170,10 +170,10 @@ async def on_message(message):
             await ch.send(f"{user}をKick")
 
         ran = random.randint(0,20)
-        if int(ran) == 25:
+        if int(ran) == 10:
             embed = discord.Embed(
                 title = "Error",
-                description = "found the unsatisfactory \n<tyoe:amanohashi>")
+                description = "found the unsatisfactory \n<type:AkiyamaNaoto>")
             await message.channel.send(embed = embed)
 
 
