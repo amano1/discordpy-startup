@@ -173,7 +173,7 @@ async def on_message(message):
         if int(ran) == 10:
             embed = discord.Embed(
                 title = "Error",
-                description = "found the unsatisfactory \n<type:AkiyamaNaoto>")
+                description = "found the unsatisfactory system\n<type:AkiyamaNaoto>")
             await message.channel.send(embed = embed)
 
 
