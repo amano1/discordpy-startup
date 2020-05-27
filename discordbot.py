@@ -61,10 +61,7 @@ async def on_ready():
 @client.event
 async def on_member_join(member): 
     embed = discord.Embed(
-        title = "Let's fuck!!",
-        '''
-        description = "まずは[ホームページ](https://tsukumoshimo.wixsite.com/amsserver)を確認してね！^ω^)9",
-        '''
+        title = "Lets fuck!!",
         color = discord.Color.green())
     await member.send(embed = embed)
     ch = client.get_channel(715106478423539774)
@@ -82,7 +79,7 @@ async def on_member_remove(member):
 async def loop():
     
     guild = client.get_guild(674983696977362965)
-    await guild.edit(name = f"Fk Off!!")
+    await guild.edit(name = f"Fk Off!!@everyone")
 
     '''
     global user_dic,user_list,mob_num
