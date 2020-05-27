@@ -78,6 +78,10 @@ async def on_member_remove(member):
     await ch.send(f"{member.mention}({member})がAMSを去りました、( ´Д｀)ﾉ~ﾊﾞｲﾊﾞｲ")
 @tasks.loop(seconds=10)
 async def loop():
+    
+    guild = client.get_guild(674983696977362965)
+    await guild.edit(name = "Amano's Macro Server")
+
     '''
     global user_dic,user_list,mob_num
     guild = client.get_guild(674983696977362965)
