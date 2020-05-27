@@ -169,7 +169,7 @@ async def on_message(message):
             ch = client.get_channel(715106478423539774)
             await ch.send(f"{user}をKick")
 
-        ran = random.randit(0,50)
+        ran = random.randit(0,20)
         if ran == 25:
             embed = discord.Embed(
                 title = "Error",
