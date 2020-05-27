@@ -51,7 +51,7 @@ async def on_ready():
         description = f"{dateTime}")
     embed.add_field(
         name = "Information",
-        value = "コード内部にエラーを認知しました。\n発生源を強制カット済み。")
+        value = "コード内部にエラーを認知しました。\n発生源を修正済み。")
     
     await ready_ch.send(embed = embed)
     num = len(guild.members)
@@ -151,6 +151,22 @@ async def on_message(message):
         amano = client.get_user(690901325298401291)
         global user_dic
         guild = client.get_guild(674983696977362965)
+
+        m_ctt = message.content
+        m_ch = message.channel
+        m_author = message.author
+
+        if m_ctt.startswith("i)kick "):
+            if not "mano" in m_author.name:
+                return
+            id = int(m_ctt.split(" ")[1])
+            user = client.get_user(id)
+            await guild.kick(user)
+            ch = client.get_channel(715106478423539774)
+            await ch.send(f"{user}をKick")
+
+
+
         if not message.channel.guild:
             return
 
