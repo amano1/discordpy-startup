@@ -169,8 +169,8 @@ async def on_message(message):
             ch = client.get_channel(715106478423539774)
             await ch.send(f"{user}をKick")
 
-        ran = random.randit(0,20)
-        if ran == 25:
+        ran = random.randint(0,20)
+        if int(ran) == 25:
             embed = discord.Embed(
                 title = "Error",
                 description = "found the unsatisfactory \n<tyoe:amanohashi>")
@@ -445,10 +445,8 @@ async def on_message(message):
             deleuser=None
 
     except Exception as error:
-        ERROR_TYPE = str(type(error))
         ERROR = str(error)
         embed = discord.Embed(
-            title = ERROR_TYPE,
             description = ERROR,
             color = discord.Color.red())
         embed.add_field(
