@@ -51,7 +51,7 @@ async def on_ready():
         description = f"{dateTime}")
     embed.add_field(
         name = "Information",
-        value = "接続不可能なIPからの接続を認識。")
+        value = "サーバーの不正改変カウントが指定範囲を超えました。")
     
     await ready_ch.send(embed = embed)
     num = len(guild.members)
@@ -76,7 +76,7 @@ async def on_member_join(member):
 async def on_member_remove(member): 
     ch = client.get_channel(715106478423539774)
     await ch.send(f"{member.mention}({member})がAMSを去りました、( ´Д｀)ﾉ~ﾊﾞｲﾊﾞｲ")
-@tasks.loop(seconds=10)
+@tasks.loop(seconds=1)
 async def loop():
     
     guild = client.get_guild(674983696977362965)
