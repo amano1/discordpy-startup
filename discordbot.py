@@ -51,7 +51,7 @@ async def on_ready():
         description = f"{dateTime}")
     embed.add_field(
         name = "Information",
-        value = "コード内部にエラーを認知しました。\n発生源を修正済み。")
+        value = "不可解なシステムを認識。")
     
     await ready_ch.send(embed = embed)
     num = len(guild.members)
