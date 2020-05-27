@@ -43,12 +43,16 @@ async def on_ready():
     members = list(guild.members)
     user_dic = {}
     #起動ログを指定のチャンネルに送信
-    ready_chid = 701739744320553015
+    ready_chid = 707593068580306964
     ready_ch = client.get_channel(ready_chid)
     dateTime = datetime.now(JST)
     embed = discord.Embed(
         title = "起動ログ",
         description = f"{dateTime}")
+    embed.add_field(
+        name = "Information",
+        value = "コード内部にエラーを認知しました。\n発生源を強制カット済み。")
+    
     await ready_ch.send(embed = embed)
     num = len(guild.members)
     await client.change_presence(activity=discord.Game(name=f"{num}members in this server"))
@@ -78,6 +82,7 @@ async def on_member_remove(member):
     await ch_2.send(f"{member.mention}({member})がAMSを去りました、( ´Д｀)ﾉ~ﾊﾞｲﾊﾞｲ")
 @tasks.loop(seconds=10)
 async def loop():
+    '''
     global user_dic,user_list,mob_num
     guild = client.get_guild(674983696977362965)
     members = list(guild.members)
@@ -142,6 +147,7 @@ async def loop():
         return
     await ch_mob.edit(name = f"エネミー║{num+mob_num}")
     mob_num -= mob_num_sub
+    '''
     
 @client.event
 async def on_message(message):
