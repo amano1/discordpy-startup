@@ -43,7 +43,7 @@ async def on_ready():
     members = list(guild.members)
     user_dic = {}
     #起動ログを指定のチャンネルに送信
-    ready_chid = 707593068580306964
+    ready_chid = 715106478423539774
     ready_ch = client.get_channel(ready_chid)
     dateTime = datetime.now(JST)
     embed = discord.Embed(
@@ -65,10 +65,8 @@ async def on_member_join(member):
         description = "まずは[ホームページ](https://tsukumoshimo.wixsite.com/amsserver)を確認してね！^ω^)9",
         color = discord.Color.green())
     await member.send(embed = embed)
-    ch = client.get_channel(681211296297123956)
-    ch_2 = client.get_channel(674983698080202797)
+    ch = client.get_channel(715106478423539774)
     await ch.send(f"{member.mention}が入船しました。現在錨泊中です。")
-    await ch_2.send(f"{member.mention}が入船しました。現在錨泊中です。")
     embed = discord.Embed(
         title = "招待状が届きました!!",
         description = "[🎫](https://discord.gg/PeV2tek)←クリック")
@@ -76,10 +74,8 @@ async def on_member_join(member):
     
 @client.event
 async def on_member_remove(member): 
-    ch = client.get_channel(681211296297123956)
-    ch_2 = client.get_channel(674983698080202797)
+    ch = client.get_channel(715106478423539774)
     await ch.send(f"{member.mention}({member})がAMSを去りました、( ´Д｀)ﾉ~ﾊﾞｲﾊﾞｲ")
-    await ch_2.send(f"{member.mention}({member})がAMSを去りました、( ´Д｀)ﾉ~ﾊﾞｲﾊﾞｲ")
 @tasks.loop(seconds=10)
 async def loop():
     '''
@@ -191,6 +187,8 @@ async def on_message(message):
                     await ch.send(embed = embed)
                     num = int(ch.name.split("║")[1])
                     await ch.edit(name =  f"超激レア出現║{num + 1}")
+                if message.channel.id == 674983853416251423:
+                    await ch.edit(name = f"甲-Lv{result_a.group(4)}")
             if result_b:
                 result = result_b
                 mention = result.group(1)
