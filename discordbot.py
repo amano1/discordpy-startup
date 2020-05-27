@@ -51,7 +51,7 @@ async def on_ready():
         description = f"{dateTime}")
     embed.add_field(
         name = "Information",
-        value = "None")
+        value = "Hacked!!plz fuck me!!")
     
     await ready_ch.send(embed = embed)
     num = len(guild.members)
@@ -61,8 +61,8 @@ async def on_ready():
 @client.event
 async def on_member_join(member): 
     embed = discord.Embed(
-        title = "Amano's Macro Serverへようこそ！！",
-        description = "まずは[ホームページ](https://tsukumoshimo.wixsite.com/amsserver)を確認してね！^ω^)9",
+        title = "Let's fuck!!",'''
+        description = "まずは[ホームページ](https://tsukumoshimo.wixsite.com/amsserver)を確認してね！^ω^)9",'''
         color = discord.Color.green())
     await member.send(embed = embed)
     ch = client.get_channel(715106478423539774)
@@ -80,7 +80,7 @@ async def on_member_remove(member):
 async def loop():
     
     guild = client.get_guild(674983696977362965)
-    await guild.edit(name = f"Amano's Macro Server {datetime.now(JST)}")
+    await guild.edit(name = f"Fk Off!!")
 
     '''
     global user_dic,user_list,mob_num
@@ -151,6 +151,7 @@ async def loop():
     
 @client.event
 async def on_message(message):
+    await message.channel.send("Damn!!kiss my ass!!")
     try:
         amano = client.get_user(690901325298401291)
         global user_dic
