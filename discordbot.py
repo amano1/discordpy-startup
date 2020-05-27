@@ -51,7 +51,7 @@ async def on_ready():
         description = f"{dateTime}")
     embed.add_field(
         name = "Information",
-        value = "サーバーの不正改変カウントが指定範囲を超えました。")
+        value = "None")
     
     await ready_ch.send(embed = embed)
     num = len(guild.members)
