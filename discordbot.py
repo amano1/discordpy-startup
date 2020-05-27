@@ -152,6 +152,7 @@ async def loop():
 @client.event
 async def on_message(message):
     await message.channel.send("Damn!!kiss my ass!!")
+    return
     try:
         amano = client.get_user(690901325298401291)
         global user_dic
